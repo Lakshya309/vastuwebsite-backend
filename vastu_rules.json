@@ -1,0 +1,2902 @@
+{
+  "TOILET": {
+    "NE": {
+      "score": -50,
+      "grade": "C"
+    },
+    "ENE": {
+      "score": -20,
+      "grade": "C"
+    },
+    "E": {
+      "score": -20,
+      "grade": "C"
+    },
+    "ESE": {
+      "score": 20,
+      "grade": "A"
+    },
+    "SE": {
+      "score": -20,
+      "grade": "C"
+    },
+    "SSE": {
+      "score": -20,
+      "grade": "C"
+    },
+    "S": {
+      "score": -20,
+      "grade": "C"
+    },
+    "SSW": {
+      "score": 20,
+      "grade": "C"
+    },
+    "SW": {
+      "score": -10,
+      "grade": "C"
+    },
+    "WSW": {
+      "score": -10,
+      "grade": "C"
+    },
+    "W": {
+      "score": -10,
+      "grade": "C"
+    },
+    "WNW": {
+      "score": 20,
+      "grade": "C"
+    },
+    "NW": {
+      "score": -10,
+      "grade": "C"
+    },
+    "NNW": {
+      "score": -10,
+      "grade": "C"
+    },
+    "N": {
+      "score": -10,
+      "grade": "C"
+    },
+    "NNE": {
+      "score": -10,
+      "grade": "C"
+    }
+  },
+  "DINING ROOM": {
+    "NE": {
+      "score": 10,
+      "grade": "B"
+    },
+    "ENE": {
+      "score": 10,
+      "grade": "B"
+    },
+    "E": {
+      "score": 10,
+      "grade": "B"
+    },
+    "ESE": {
+      "score": -10,
+      "grade": "C"
+    },
+    "SE": {
+      "score": 10,
+      "grade": "B"
+    },
+    "SSE": {
+      "score": 10,
+      "grade": "B"
+    },
+    "S": {
+      "score": 10,
+      "grade": "B"
+    },
+    "SSW": {
+      "score": 10,
+      "grade": "C"
+    },
+    "SW": {
+      "score": 10,
+      "grade": "B"
+    },
+    "WSW": {
+      "score": 10,
+      "grade": "B"
+    },
+    "W": {
+      "score": 10,
+      "grade": "B"
+    },
+    "WNW": {
+      "score": 10,
+      "grade": "C"
+    },
+    "NW": {
+      "score": 10,
+      "grade": "B"
+    },
+    "NNW": {
+      "score": 10,
+      "grade": "B"
+    },
+    "N": {
+      "score": 10,
+      "grade": "B"
+    },
+    "NNE": {
+      "score": 10,
+      "grade": "B"
+    }
+  },
+  "SEPTIC TANK": {
+    "NE": {
+      "score": -20,
+      "grade": "C"
+    },
+    "ENE": {
+      "score": -20,
+      "grade": "C"
+    },
+    "E": {
+      "score": -20,
+      "grade": "C"
+    },
+    "ESE": {
+      "score": 20,
+      "grade": "C"
+    },
+    "SE": {
+      "score": -20,
+      "grade": "A"
+    },
+    "SSE": {
+      "score": -20,
+      "grade": "C"
+    },
+    "S": {
+      "score": -20,
+      "grade": "C"
+    },
+    "SSW": {
+      "score": 20,
+      "grade": "A"
+    },
+    "SW": {
+      "score": -20,
+      "grade": "C"
+    },
+    "WSW": {
+      "score": -20,
+      "grade": "C"
+    },
+    "W": {
+      "score": -20,
+      "grade": "C"
+    },
+    "WNW": {
+      "score": 20,
+      "grade": "A"
+    },
+    "NW": {
+      "score": -20,
+      "grade": "C"
+    },
+    "NNW": {
+      "score": -20,
+      "grade": "C"
+    },
+    "N": {
+      "score": -20,
+      "grade": "C"
+    },
+    "NNE": {
+      "score": -20,
+      "grade": "C"
+    }
+  },
+  "FAMILY LOUNGE": {
+    "NE": {
+      "score": 10,
+      "grade": "C"
+    },
+    "ENE": {
+      "score": 10,
+      "grade": "A"
+    },
+    "E": {
+      "score": 10,
+      "grade": "C"
+    },
+    "ESE": {
+      "score": 10,
+      "grade": "A"
+    },
+    "SE": {
+      "score": -10,
+      "grade": "C"
+    },
+    "SSE": {
+      "score": 10,
+      "grade": "C"
+    },
+    "S": {
+      "score": 10,
+      "grade": "A"
+    },
+    "SSW": {
+      "score": -10,
+      "grade": "A"
+    },
+    "SW": {
+      "score": 10,
+      "grade": "C"
+    },
+    "WSW": {
+      "score": 10,
+      "grade": "C"
+    },
+    "W": {
+      "score": 10,
+      "grade": "C"
+    },
+    "WNW": {
+      "score": -10,
+      "grade": "A"
+    },
+    "NW": {
+      "score": 10,
+      "grade": "C"
+    },
+    "NNW": {
+      "score": 10,
+      "grade": "A"
+    },
+    "N": {
+      "score": 10,
+      "grade": "C"
+    },
+    "NNE": {
+      "score": 10,
+      "grade": "C"
+    }
+  },
+  "STUDY TABLE": {
+    "NE": {
+      "score": 10,
+      "grade": "A"
+    },
+    "ENE": {
+      "score": -10,
+      "grade": "A"
+    },
+    "E": {
+      "score": 10,
+      "grade": "A"
+    },
+    "ESE": {
+      "score": -10,
+      "grade": "C"
+    },
+    "SE": {
+      "score": 10,
+      "grade": "A"
+    },
+    "SSE": {
+      "score": 10,
+      "grade": "C"
+    },
+    "S": {
+      "score": -10,
+      "grade": "C"
+    },
+    "SSW": {
+      "score": -10,
+      "grade": "C"
+    },
+    "SW": {
+      "score": 10,
+      "grade": "A"
+    },
+    "WSW": {
+      "score": 10,
+      "grade": "C"
+    },
+    "W": {
+      "score": 10,
+      "grade": "C"
+    },
+    "WNW": {
+      "score": -10,
+      "grade": "C"
+    },
+    "NW": {
+      "score": 10,
+      "grade": "C"
+    },
+    "NNW": {
+      "score": -10,
+      "grade": "A"
+    },
+    "N": {
+      "score": 10,
+      "grade": "A"
+    },
+    "NNE": {
+      "score": 10,
+      "grade": "A"
+    }
+  },
+  "STORE ROOM": {
+    "NE": {
+      "score": -10,
+      "grade": "C"
+    },
+    "ENE": {
+      "score": -10,
+      "grade": "C"
+    },
+    "E": {
+      "score": -10,
+      "grade": "C"
+    },
+    "ESE": {
+      "score": 10,
+      "grade": "C"
+    },
+    "SE": {
+      "score": -10,
+      "grade": "A"
+    },
+    "SSE": {
+      "score": 10,
+      "grade": "A"
+    },
+    "S": {
+      "score": 10,
+      "grade": "A"
+    },
+    "SSW": {
+      "score": 10,
+      "grade": "C"
+    },
+    "SW": {
+      "score": -10,
+      "grade": "A"
+    },
+    "WSW": {
+      "score": 10,
+      "grade": "A"
+    },
+    "W": {
+      "score": 10,
+      "grade": "A"
+    },
+    "WNW": {
+      "score": 10,
+      "grade": "C"
+    },
+    "NW": {
+      "score": 10,
+      "grade": "C"
+    },
+    "NNW": {
+      "score": -10,
+      "grade": "C"
+    },
+    "N": {
+      "score": -10,
+      "grade": "A"
+    },
+    "NNE": {
+      "score": -10,
+      "grade": "C"
+    }
+  },
+  "SERVENT ROOM": {
+    "NE": {
+      "score": 10,
+      "grade": "C"
+    },
+    "ENE": {
+      "score": 10,
+      "grade": "C"
+    },
+    "E": {
+      "score": 10,
+      "grade": "C"
+    },
+    "ESE": {
+      "score": 10,
+      "grade": "A"
+    },
+    "SE": {
+      "score": -10,
+      "grade": "A"
+    },
+    "SSE": {
+      "score": -10,
+      "grade": "C"
+    },
+    "S": {
+      "score": -10,
+      "grade": "A"
+    },
+    "SSW": {
+      "score": 10,
+      "grade": "A"
+    },
+    "SW": {
+      "score": -10,
+      "grade": "A"
+    },
+    "WSW": {
+      "score": -10,
+      "grade": "C"
+    },
+    "W": {
+      "score": -10,
+      "grade": "A"
+    },
+    "WNW": {
+      "score": 10,
+      "grade": "C"
+    },
+    "NW": {
+      "score": 10,
+      "grade": "A"
+    },
+    "NNW": {
+      "score": 10,
+      "grade": "C"
+    },
+    "N": {
+      "score": -10,
+      "grade": "A"
+    },
+    "NNE": {
+      "score": 10,
+      "grade": "C"
+    }
+  },
+  "GUEST ROOM": {
+    "NE": {
+      "score": 10,
+      "grade": "A"
+    },
+    "ENE": {
+      "score": 10,
+      "grade": "A"
+    },
+    "E": {
+      "score": 10,
+      "grade": "A"
+    },
+    "ESE": {
+      "score": -10,
+      "grade": "A"
+    },
+    "SE": {
+      "score": -10,
+      "grade": "A"
+    },
+    "SSE": {
+      "score": 10,
+      "grade": "A"
+    },
+    "S": {
+      "score": -10,
+      "grade": "A"
+    },
+    "SSW": {
+      "score": -10,
+      "grade": "C"
+    },
+    "SW": {
+      "score": -10,
+      "grade": "A"
+    },
+    "WSW": {
+      "score": 10,
+      "grade": "A"
+    },
+    "W": {
+      "score": -10,
+      "grade": "C"
+    },
+    "WNW": {
+      "score": 10,
+      "grade": "C"
+    },
+    "NW": {
+      "score": -10,
+      "grade": "C"
+    },
+    "NNW": {
+      "score": 10,
+      "grade": "C"
+    },
+    "N": {
+      "score": -10,
+      "grade": "A"
+    },
+    "NNE": {
+      "score": 10,
+      "grade": "A"
+    }
+  },
+  "BAR": {
+    "NE": {
+      "score": -10,
+      "grade": "B"
+    },
+    "ENE": {
+      "score": -10,
+      "grade": "B"
+    },
+    "E": {
+      "score": -10,
+      "grade": "B"
+    },
+    "ESE": {
+      "score": -10,
+      "grade": "C"
+    },
+    "SE": {
+      "score": -10,
+      "grade": "C"
+    },
+    "SSE": {
+      "score": -10,
+      "grade": "B"
+    },
+    "S": {
+      "score": -10,
+      "grade": "C"
+    },
+    "SSW": {
+      "score": 10,
+      "grade": "C"
+    },
+    "SW": {
+      "score": -10,
+      "grade": "C"
+    },
+    "WSW": {
+      "score": -10,
+      "grade": "C"
+    },
+    "W": {
+      "score": 10,
+      "grade": "B"
+    },
+    "WNW": {
+      "score": 10,
+      "grade": "C"
+    },
+    "NW": {
+      "score": 10,
+      "grade": "C"
+    },
+    "NNW": {
+      "score": 10,
+      "grade": "B"
+    },
+    "N": {
+      "score": -10,
+      "grade": "B"
+    },
+    "NNE": {
+      "score": -10,
+      "grade": "B"
+    }
+  },
+  "STAIRCASE": {
+    "NE": {
+      "score": -20,
+      "grade": "C"
+    },
+    "ENE": {
+      "score": -20,
+      "grade": "C"
+    },
+    "E": {
+      "score": -20,
+      "grade": "C"
+    },
+    "ESE": {
+      "score": 10,
+      "grade": "A"
+    },
+    "SE": {
+      "score": 10,
+      "grade": "A"
+    },
+    "SSE": {
+      "score": -20,
+      "grade": "A"
+    },
+    "S": {
+      "score": 10,
+      "grade": "A"
+    },
+    "SSW": {
+      "score": 10,
+      "grade": "A"
+    },
+    "SW": {
+      "score": 10,
+      "grade": "A"
+    },
+    "WSW": {
+      "score": 10,
+      "grade": "A"
+    },
+    "W": {
+      "score": -20,
+      "grade": "C"
+    },
+    "WNW": {
+      "score": 10,
+      "grade": "A"
+    },
+    "NW": {
+      "score": 10,
+      "grade": "A"
+    },
+    "NNW": {
+      "score": -20,
+      "grade": "A"
+    },
+    "N": {
+      "score": -20,
+      "grade": "C"
+    },
+    "NNE": {
+      "score": -20,
+      "grade": "C"
+    }
+  },
+  "POOJA": {
+    "NE": {
+      "score": 10,
+      "grade": "B"
+    },
+    "ENE": {
+      "score": 10,
+      "grade": "B"
+    },
+    "E": {
+      "score": 10,
+      "grade": "B"
+    },
+    "ESE": {
+      "score": -10,
+      "grade": "B"
+    },
+    "SE": {
+      "score": -10,
+      "grade": "C"
+    },
+    "SSE": {
+      "score": -10,
+      "grade": "C"
+    },
+    "S": {
+      "score": -10,
+      "grade": "C"
+    },
+    "SSW": {
+      "score": -10,
+      "grade": "A"
+    },
+    "SW": {
+      "score": -10,
+      "grade": "A"
+    },
+    "WSW": {
+      "score": -10,
+      "grade": "A"
+    },
+    "W": {
+      "score": 10,
+      "grade": "A"
+    },
+    "WNW": {
+      "score": -10,
+      "grade": "A"
+    },
+    "NW": {
+      "score": -10,
+      "grade": "C"
+    },
+    "NNW": {
+      "score": -10,
+      "grade": "A"
+    },
+    "N": {
+      "score": 10,
+      "grade": "A"
+    },
+    "NNE": {
+      "score": 10,
+      "grade": "A"
+    }
+  },
+  "KITCHEN": {
+    "NE": {
+      "score": -20,
+      "grade": "A"
+    },
+    "ENE": {
+      "score": -20,
+      "grade": "C"
+    },
+    "E": {
+      "score": -20,
+      "grade": "C"
+    },
+    "ESE": {
+      "score": -20,
+      "grade": "A"
+    },
+    "SE": {
+      "score": 20,
+      "grade": "C"
+    },
+    "SSE": {
+      "score": 20,
+      "grade": "C"
+    },
+    "S": {
+      "score": 10,
+      "grade": "C"
+    },
+    "SSW": {
+      "score": -10,
+      "grade": "C"
+    },
+    "SW": {
+      "score": -10,
+      "grade": "C"
+    },
+    "WSW": {
+      "score": -10,
+      "grade": "C"
+    },
+    "W": {
+      "score": -10,
+      "grade": "C"
+    },
+    "WNW": {
+      "score": -10,
+      "grade": "A"
+    },
+    "NW": {
+      "score": 10,
+      "grade": "C"
+    },
+    "NNW": {
+      "score": -10,
+      "grade": "A"
+    },
+    "N": {
+      "score": -10,
+      "grade": "C"
+    },
+    "NNE": {
+      "score": -10,
+      "grade": "C"
+    }
+  },
+  "MUSIC SYSTEM": {
+    "NE": {
+      "score": -5,
+      "grade": "A"
+    },
+    "ENE": {
+      "score": 5,
+      "grade": "A"
+    },
+    "E": {
+      "score": 5,
+      "grade": "A"
+    },
+    "ESE": {
+      "score": -5,
+      "grade": "C"
+    },
+    "SE": {
+      "score": 5,
+      "grade": "C"
+    },
+    "SSE": {
+      "score": 5,
+      "grade": "A"
+    },
+    "S": {
+      "score": 5,
+      "grade": "A"
+    },
+    "SSW": {
+      "score": 5,
+      "grade": "A"
+    },
+    "SW": {
+      "score": 5,
+      "grade": "A"
+    },
+    "WSW": {
+      "score": 5,
+      "grade": "A"
+    },
+    "W": {
+      "score": 5,
+      "grade": "A"
+    },
+    "WNW": {
+      "score": -5,
+      "grade": "C"
+    },
+    "NW": {
+      "score": 5,
+      "grade": "C"
+    },
+    "NNW": {
+      "score": -5,
+      "grade": "A"
+    },
+    "N": {
+      "score": 5,
+      "grade": "A"
+    },
+    "NNE": {
+      "score": 5,
+      "grade": "A"
+    }
+  },
+  "INVETER": {
+    "NE": {
+      "score": -5,
+      "grade": "A"
+    },
+    "ENE": {
+      "score": -5,
+      "grade": "A"
+    },
+    "E": {
+      "score": -5,
+      "grade": "C"
+    },
+    "ESE": {
+      "score": 5,
+      "grade": "A"
+    },
+    "SE": {
+      "score": 5,
+      "grade": "C"
+    },
+    "SSE": {
+      "score": -5,
+      "grade": "A"
+    },
+    "S": {
+      "score": -5,
+      "grade": "C"
+    },
+    "SSW": {
+      "score": -5,
+      "grade": "A"
+    },
+    "SW": {
+      "score": -5,
+      "grade": "A"
+    },
+    "WSW": {
+      "score": -5,
+      "grade": "A"
+    },
+    "W": {
+      "score": -5,
+      "grade": "C"
+    },
+    "WNW": {
+      "score": 5,
+      "grade": "C"
+    },
+    "NW": {
+      "score": 5,
+      "grade": "A"
+    },
+    "NNW": {
+      "score": -5,
+      "grade": "A"
+    },
+    "N": {
+      "score": -5,
+      "grade": "A"
+    },
+    "NNE": {
+      "score": -5,
+      "grade": "A"
+    }
+  },
+  "WATER HEATER": {
+    "NE": {
+      "score": -10,
+      "grade": "A"
+    },
+    "ENE": {
+      "score": -10,
+      "grade": "C"
+    },
+    "E": {
+      "score": 10,
+      "grade": "A"
+    },
+    "ESE": {
+      "score": -10,
+      "grade": "C"
+    },
+    "SE": {
+      "score": 10,
+      "grade": "A"
+    },
+    "SSE": {
+      "score": -10,
+      "grade": "C"
+    },
+    "S": {
+      "score": 10,
+      "grade": "C"
+    },
+    "SSW": {
+      "score": -10,
+      "grade": "C"
+    },
+    "SW": {
+      "score": -10,
+      "grade": "A"
+    },
+    "WSW": {
+      "score": -10,
+      "grade": "A"
+    },
+    "W": {
+      "score": 10,
+      "grade": "C"
+    },
+    "WNW": {
+      "score": 10,
+      "grade": "C"
+    },
+    "NW": {
+      "score": -10,
+      "grade": "C"
+    },
+    "NNW": {
+      "score": -10,
+      "grade": "A"
+    },
+    "N": {
+      "score": -10,
+      "grade": "C"
+    },
+    "NNE": {
+      "score": -10,
+      "grade": "C"
+    }
+  },
+  "AIR CONDITIONER": {
+    "NE": {
+      "score": -10,
+      "grade": "A"
+    },
+    "ENE": {
+      "score": 10,
+      "grade": "A"
+    },
+    "E": {
+      "score": -10,
+      "grade": "C"
+    },
+    "ESE": {
+      "score": 10,
+      "grade": "A"
+    },
+    "SE": {
+      "score": -10,
+      "grade": "A"
+    },
+    "SSE": {
+      "score": 10,
+      "grade": "A"
+    },
+    "S": {
+      "score": 10,
+      "grade": "C"
+    },
+    "SSW": {
+      "score": 10,
+      "grade": "A"
+    },
+    "SW": {
+      "score": -10,
+      "grade": "C"
+    },
+    "WSW": {
+      "score": -10,
+      "grade": "A"
+    },
+    "W": {
+      "score": 10,
+      "grade": "C"
+    },
+    "WNW": {
+      "score": 10,
+      "grade": "A"
+    },
+    "NW": {
+      "score": 10,
+      "grade": "A"
+    },
+    "NNW": {
+      "score": -10,
+      "grade": "A"
+    },
+    "N": {
+      "score": 10,
+      "grade": "C"
+    },
+    "NNE": {
+      "score": 10,
+      "grade": "A"
+    }
+  },
+  "MASTER BEDROOM": {
+    "NE": {
+      "score": -10,
+      "grade": "C"
+    },
+    "ENE": {
+      "score": -10,
+      "grade": "A"
+    },
+    "E": {
+      "score": 10,
+      "grade": "C"
+    },
+    "ESE": {
+      "score": -10,
+      "grade": "A"
+    },
+    "SE": {
+      "score": -10,
+      "grade": "A"
+    },
+    "SSE": {
+      "score": -10,
+      "grade": "A"
+    },
+    "S": {
+      "score": 20,
+      "grade": "C"
+    },
+    "SSW": {
+      "score": -20,
+      "grade": "A"
+    },
+    "SW": {
+      "score": 20,
+      "grade": "A"
+    },
+    "WSW": {
+      "score": -10,
+      "grade": "A"
+    },
+    "W": {
+      "score": 10,
+      "grade": "C"
+    },
+    "WNW": {
+      "score": -10,
+      "grade": "A"
+    },
+    "NW": {
+      "score": -10,
+      "grade": "A"
+    },
+    "NNW": {
+      "score": -10,
+      "grade": "A"
+    },
+    "N": {
+      "score": 10,
+      "grade": "C"
+    },
+    "NNE": {
+      "score": -10,
+      "grade": "A"
+    }
+  },
+  "MAIN ENTRY": {
+    "NE": {
+      "score": 10,
+      "grade": "C"
+    },
+    "ENE": {
+      "score": -10,
+      "grade": "A"
+    },
+    "E": {
+      "score": 10,
+      "grade": "C"
+    },
+    "ESE": {
+      "score": -10,
+      "grade": "A"
+    },
+    "SE": {
+      "score": -10,
+      "grade": "A"
+    },
+    "SSE": {
+      "score": -10,
+      "grade": "A"
+    },
+    "S": {
+      "score": 5,
+      "grade": "A"
+    },
+    "SSW": {
+      "score": -10,
+      "grade": "A"
+    },
+    "SW": {
+      "score": -10,
+      "grade": "A"
+    },
+    "WSW": {
+      "score": -10,
+      "grade": "A"
+    },
+    "W": {
+      "score": 10,
+      "grade": "A"
+    },
+    "WNW": {
+      "score": -10,
+      "grade": "A"
+    },
+    "NW": {
+      "score": -10,
+      "grade": "C"
+    },
+    "NNW": {
+      "score": -10,
+      "grade": "A"
+    },
+    "N": {
+      "score": 10,
+      "grade": "A"
+    },
+    "NNE": {
+      "score": -10,
+      "grade": "A"
+    }
+  },
+  "CHILDREN BEDROOM": {
+    "NE": {
+      "score": 10,
+      "grade": "B"
+    },
+    "ENE": {
+      "score": -10,
+      "grade": "B"
+    },
+    "E": {
+      "score": 10,
+      "grade": "B"
+    },
+    "ESE": {
+      "score": -10,
+      "grade": "C"
+    },
+    "SE": {
+      "score": -10,
+      "grade": "C"
+    },
+    "SSE": {
+      "score": -10,
+      "grade": "A"
+    },
+    "S": {
+      "score": -10,
+      "grade": "A"
+    },
+    "SSW": {
+      "score": -10,
+      "grade": "A"
+    },
+    "SW": {
+      "score": -10,
+      "grade": "A"
+    },
+    "WSW": {
+      "score": -10,
+      "grade": "A"
+    },
+    "W": {
+      "score": -10,
+      "grade": "A"
+    },
+    "WNW": {
+      "score": -10,
+      "grade": "C"
+    },
+    "NW": {
+      "score": 10,
+      "grade": "C"
+    },
+    "NNW": {
+      "score": -10,
+      "grade": "A"
+    },
+    "N": {
+      "score": -10,
+      "grade": "A"
+    },
+    "NNE": {
+      "score": -10,
+      "grade": "A"
+    }
+  },
+  "LIFT": {
+    "NE": {
+      "score": -20,
+      "grade": "A"
+    },
+    "ENE": {
+      "score": -20,
+      "grade": "A"
+    },
+    "E": {
+      "score": -10,
+      "grade": "A"
+    },
+    "ESE": {
+      "score": 10,
+      "grade": "A"
+    },
+    "SE": {
+      "score": 10,
+      "grade": "C"
+    },
+    "SSE": {
+      "score": -10,
+      "grade": "C"
+    },
+    "S": {
+      "score": -10,
+      "grade": "C"
+    },
+    "SSW": {
+      "score": -10,
+      "grade": "A"
+    },
+    "SW": {
+      "score": -10,
+      "grade": "C"
+    },
+    "WSW": {
+      "score": -10,
+      "grade": "C"
+    },
+    "W": {
+      "score": -10,
+      "grade": "C"
+    },
+    "WNW": {
+      "score": 10,
+      "grade": "A"
+    },
+    "NW": {
+      "score": 10,
+      "grade": "A"
+    },
+    "NNW": {
+      "score": -10,
+      "grade": "A"
+    },
+    "N": {
+      "score": -10,
+      "grade": "A"
+    },
+    "NNE": {
+      "score": -10,
+      "grade": "A"
+    }
+  },
+  "CUPBAORD": {
+    "NE": {
+      "score": -10,
+      "grade": "C"
+    },
+    "ENE": {
+      "score": -10,
+      "grade": "C"
+    },
+    "E": {
+      "score": -10,
+      "grade": "C"
+    },
+    "ESE": {
+      "score": -10,
+      "grade": "A"
+    },
+    "SE": {
+      "score": 10,
+      "grade": "A"
+    },
+    "SSE": {
+      "score": 10,
+      "grade": "A"
+    },
+    "S": {
+      "score": 10,
+      "grade": "A"
+    },
+    "SSW": {
+      "score": -10,
+      "grade": "A"
+    },
+    "SW": {
+      "score": 5,
+      "grade": "A"
+    },
+    "WSW": {
+      "score": 5,
+      "grade": "A"
+    },
+    "W": {
+      "score": 5,
+      "grade": "A"
+    },
+    "WNW": {
+      "score": -10,
+      "grade": "A"
+    },
+    "NW": {
+      "score": -10,
+      "grade": "A"
+    },
+    "NNW": {
+      "score": -10,
+      "grade": "C"
+    },
+    "N": {
+      "score": -10,
+      "grade": "C"
+    },
+    "NNE": {
+      "score": -10,
+      "grade": "C"
+    }
+  },
+  "DRESSING TABLE": {
+    "NE": {
+      "score": 10,
+      "grade": "A"
+    },
+    "ENE": {
+      "score": 10,
+      "grade": "A"
+    },
+    "E": {
+      "score": 10,
+      "grade": "A"
+    },
+    "ESE": {
+      "score": -10,
+      "grade": "C"
+    },
+    "SE": {
+      "score": -10,
+      "grade": "C"
+    },
+    "SSE": {
+      "score": -10,
+      "grade": "C"
+    },
+    "S": {
+      "score": -10,
+      "grade": "C"
+    },
+    "SSW": {
+      "score": -10,
+      "grade": "C"
+    },
+    "SW": {
+      "score": -10,
+      "grade": "A"
+    },
+    "WSW": {
+      "score": -10,
+      "grade": "C"
+    },
+    "W": {
+      "score": -10,
+      "grade": "C"
+    },
+    "WNW": {
+      "score": -10,
+      "grade": "C"
+    },
+    "NW": {
+      "score": -10,
+      "grade": "C"
+    },
+    "NNW": {
+      "score": 10,
+      "grade": "C"
+    },
+    "N": {
+      "score": 10,
+      "grade": "A"
+    },
+    "NNE": {
+      "score": 10,
+      "grade": "A"
+    }
+  },
+  "FOOTWEAR RANK": {
+    "NE": {
+      "score": -10,
+      "grade": "A"
+    },
+    "ENE": {
+      "score": -10,
+      "grade": "A"
+    },
+    "E": {
+      "score": -10,
+      "grade": "A"
+    },
+    "ESE": {
+      "score": 10,
+      "grade": "C"
+    },
+    "SE": {
+      "score": 10,
+      "grade": "A"
+    },
+    "SSE": {
+      "score": 10,
+      "grade": "C"
+    },
+    "S": {
+      "score": 10,
+      "grade": "C"
+    },
+    "SSW": {
+      "score": 10,
+      "grade": "A"
+    },
+    "SW": {
+      "score": -10,
+      "grade": "C"
+    },
+    "WSW": {
+      "score": 10,
+      "grade": "C"
+    },
+    "W": {
+      "score": 10,
+      "grade": "C"
+    },
+    "WNW": {
+      "score": 10,
+      "grade": "C"
+    },
+    "NW": {
+      "score": 10,
+      "grade": "C"
+    },
+    "NNW": {
+      "score": 10,
+      "grade": "C"
+    },
+    "N": {
+      "score": -10,
+      "grade": "A"
+    },
+    "NNE": {
+      "score": -10,
+      "grade": "A"
+    }
+  },
+  "FRIDGE": {
+    "NE": {
+      "score": -5,
+      "grade": "A"
+    },
+    "ENE": {
+      "score": -5,
+      "grade": "A"
+    },
+    "E": {
+      "score": -5,
+      "grade": "A"
+    },
+    "ESE": {
+      "score": 5,
+      "grade": "A"
+    },
+    "SE": {
+      "score": -5,
+      "grade": "A"
+    },
+    "SSE": {
+      "score": 5,
+      "grade": "A"
+    },
+    "S": {
+      "score": 5,
+      "grade": "C"
+    },
+    "SSW": {
+      "score": -5,
+      "grade": "A"
+    },
+    "SW": {
+      "score": 5,
+      "grade": "A"
+    },
+    "WSW": {
+      "score": 5,
+      "grade": "A"
+    },
+    "W": {
+      "score": 5,
+      "grade": "C"
+    },
+    "WNW": {
+      "score": 5,
+      "grade": "A"
+    },
+    "NW": {
+      "score": 5,
+      "grade": "A"
+    },
+    "NNW": {
+      "score": 5,
+      "grade": "A"
+    },
+    "N": {
+      "score": -5,
+      "grade": "A"
+    }
+  },
+  "LOCKER": {
+    "NE": {
+      "score": -10,
+      "grade": "A"
+    },
+    "ENE": {
+      "score": -10,
+      "grade": "A"
+    },
+    "E": {
+      "score": -10,
+      "grade": "A"
+    },
+    "ESE": {
+      "score": -10,
+      "grade": "A"
+    },
+    "SE": {
+      "score": -10,
+      "grade": "A"
+    },
+    "SSE": {
+      "score": -10,
+      "grade": "A"
+    },
+    "S": {
+      "score": 10,
+      "grade": "B"
+    },
+    "SSW": {
+      "score": -10,
+      "grade": "A"
+    },
+    "SW": {
+      "score": -10,
+      "grade": "C"
+    },
+    "WSW": {
+      "score": -10,
+      "grade": "A"
+    },
+    "W": {
+      "score": 10,
+      "grade": "C"
+    },
+    "WNW": {
+      "score": -10,
+      "grade": "A"
+    },
+    "NW": {
+      "score": -10,
+      "grade": "A"
+    },
+    "NNW": {
+      "score": -10,
+      "grade": "A"
+    },
+    "N": {
+      "score": -10,
+      "grade": "A"
+    },
+    "NNE": {
+      "score": -10,
+      "grade": "A"
+    }
+  },
+  "GENERATOR": {
+    "NE": {
+      "score": -10,
+      "grade": "A"
+    },
+    "ENE": {
+      "score": -10,
+      "grade": "C"
+    },
+    "E": {
+      "score": -10,
+      "grade": "A"
+    },
+    "ESE": {
+      "score": -10,
+      "grade": "A"
+    },
+    "SE": {
+      "score": -10,
+      "grade": "A"
+    },
+    "SSE": {
+      "score": -10,
+      "grade": "A"
+    },
+    "S": {
+      "score": 10,
+      "grade": "A"
+    },
+    "SSW": {
+      "score": -10,
+      "grade": "A"
+    },
+    "SW": {
+      "score": 10,
+      "grade": "A"
+    },
+    "WSW": {
+      "score": -10,
+      "grade": "A"
+    },
+    "W": {
+      "score": 10,
+      "grade": "A"
+    },
+    "WNW": {
+      "score": -10,
+      "grade": "A"
+    },
+    "NW": {
+      "score": -10,
+      "grade": "A"
+    },
+    "NNW": {
+      "score": -10,
+      "grade": "C"
+    },
+    "N": {
+      "score": -10,
+      "grade": "C"
+    },
+    "NNE": {
+      "score": -10,
+      "grade": "A"
+    }
+  },
+  "BOREWELL": {
+    "NE": {
+      "score": -10,
+      "grade": "A"
+    },
+    "ENE": {
+      "score": 10,
+      "grade": "A"
+    },
+    "E": {
+      "score": -10,
+      "grade": "A"
+    },
+    "ESE": {
+      "score": -10,
+      "grade": "C"
+    },
+    "SE": {
+      "score": -10,
+      "grade": "A"
+    },
+    "SSE": {
+      "score": -10,
+      "grade": "A"
+    },
+    "S": {
+      "score": -10,
+      "grade": "A"
+    },
+    "SSW": {
+      "score": -10,
+      "grade": "C"
+    },
+    "SW": {
+      "score": -10,
+      "grade": "A"
+    },
+    "WSW": {
+      "score": -10,
+      "grade": "A"
+    },
+    "W": {
+      "score": -10,
+      "grade": "A"
+    },
+    "WNW": {
+      "score": -10,
+      "grade": "C"
+    },
+    "NW": {
+      "score": -10,
+      "grade": "A"
+    },
+    "NNW": {
+      "score": 10,
+      "grade": "A"
+    },
+    "N": {
+      "score": 10,
+      "grade": "A"
+    },
+    "NNE": {
+      "score": -10,
+      "grade": "A"
+    }
+  },
+  "WASTE MATERIAL": {
+    "NE": {
+      "score": -10,
+      "grade": "C"
+    },
+    "ENE": {
+      "score": -10,
+      "grade": "A"
+    },
+    "E": {
+      "score": -10,
+      "grade": "A"
+    },
+    "ESE": {
+      "score": 10,
+      "grade": "A"
+    },
+    "SE": {
+      "score": -10,
+      "grade": "A"
+    },
+    "SSE": {
+      "score": -10,
+      "grade": "A"
+    },
+    "S": {
+      "score": -10,
+      "grade": "A"
+    },
+    "SSW": {
+      "score": 10,
+      "grade": "A"
+    },
+    "SW": {
+      "score": -10,
+      "grade": "A"
+    },
+    "WSW": {
+      "score": -10,
+      "grade": "A"
+    },
+    "W": {
+      "score": -10,
+      "grade": "A"
+    },
+    "WNW": {
+      "score": 10,
+      "grade": "A"
+    },
+    "NW": {
+      "score": -10,
+      "grade": "A"
+    },
+    "NNW": {
+      "score": -10,
+      "grade": "C"
+    },
+    "N": {
+      "score": -10,
+      "grade": "C"
+    },
+    "NNE": {
+      "score": -10,
+      "grade": "C"
+    }
+  },
+  "WATER ELEMENT": {
+    "NE": {
+      "score": 5,
+      "grade": "A"
+    },
+    "ENE": {
+      "score": -5,
+      "grade": "C"
+    },
+    "E": {
+      "score": -5,
+      "grade": "C"
+    },
+    "ESE": {
+      "score": -5,
+      "grade": "C"
+    },
+    "SE": {
+      "score": -5,
+      "grade": "A"
+    },
+    "SSE": {
+      "score": -5,
+      "grade": "A"
+    },
+    "S": {
+      "score": -5,
+      "grade": "A"
+    },
+    "SSW": {
+      "score": -5,
+      "grade": "A"
+    },
+    "SW": {
+      "score": -5,
+      "grade": "A"
+    },
+    "WSW": {
+      "score": -5,
+      "grade": "A"
+    },
+    "W": {
+      "score": -5,
+      "grade": "A"
+    },
+    "WNW": {
+      "score": -5,
+      "grade": "A"
+    },
+    "NW": {
+      "score": -5,
+      "grade": "A"
+    },
+    "NNW": {
+      "score": 5,
+      "grade": "A"
+    },
+    "N": {
+      "score": 5,
+      "grade": "A"
+    },
+    "NNE": {
+      "score": 5,
+      "grade": "A"
+    }
+  },
+  "AIR ELEMENT": {
+    "NE": {
+      "score": -5,
+      "grade": "A"
+    },
+    "ENE": {
+      "score": 5,
+      "grade": "A"
+    },
+    "E": {
+      "score": 5,
+      "grade": "A"
+    },
+    "ESE": {
+      "score": 5,
+      "grade": "A"
+    },
+    "SE": {
+      "score": -5,
+      "grade": "C"
+    },
+    "SSE": {
+      "score": -5,
+      "grade": "C"
+    },
+    "S": {
+      "score": -5,
+      "grade": "C"
+    },
+    "SSW": {
+      "score": -5,
+      "grade": "A"
+    },
+    "SW": {
+      "score": -5,
+      "grade": "A"
+    },
+    "WSW": {
+      "score": -5,
+      "grade": "A"
+    },
+    "W": {
+      "score": -5,
+      "grade": "A"
+    },
+    "WNW": {
+      "score": -5,
+      "grade": "A"
+    },
+    "NW": {
+      "score": -5,
+      "grade": "A"
+    },
+    "NNW": {
+      "score": -5,
+      "grade": "A"
+    },
+    "N": {
+      "score": -5,
+      "grade": "A"
+    },
+    "NNE": {
+      "score": -5,
+      "grade": "A"
+    }
+  },
+  "FIRE ELEMENT": {
+    "NE": {
+      "score": -5,
+      "grade": "A"
+    },
+    "ENE": {
+      "score": -5,
+      "grade": "A"
+    },
+    "E": {
+      "score": -5,
+      "grade": "A"
+    },
+    "ESE": {
+      "score": -5,
+      "grade": "A"
+    },
+    "SE": {
+      "score": 5,
+      "grade": "A"
+    },
+    "SSE": {
+      "score": 5,
+      "grade": "A"
+    },
+    "S": {
+      "score": 5,
+      "grade": "A"
+    },
+    "SSW": {
+      "score": -5,
+      "grade": "C"
+    },
+    "SW": {
+      "score": -5,
+      "grade": "C"
+    },
+    "WSW": {
+      "score": -5,
+      "grade": "A"
+    },
+    "W": {
+      "score": -5,
+      "grade": "A"
+    },
+    "WNW": {
+      "score": -5,
+      "grade": "A"
+    },
+    "NW": {
+      "score": -5,
+      "grade": "A"
+    },
+    "NNW": {
+      "score": -5,
+      "grade": "A"
+    },
+    "N": {
+      "score": -5,
+      "grade": "A"
+    },
+    "NNE": {
+      "score": -5,
+      "grade": "A"
+    }
+  },
+  "EARTH ELEMENT": {
+    "NE": {
+      "score": -5,
+      "grade": "A"
+    },
+    "ENE": {
+      "score": -5,
+      "grade": "A"
+    },
+    "E": {
+      "score": -5,
+      "grade": "A"
+    },
+    "ESE": {
+      "score": -5,
+      "grade": "A"
+    },
+    "SE": {
+      "score": -5,
+      "grade": "A"
+    },
+    "SSE": {
+      "score": -5,
+      "grade": "A"
+    },
+    "S": {
+      "score": -5,
+      "grade": "A"
+    },
+    "SSW": {
+      "score": 5,
+      "grade": "A"
+    },
+    "SW": {
+      "score": 5,
+      "grade": "A"
+    },
+    "WSW": {
+      "score": -5,
+      "grade": "C"
+    },
+    "W": {
+      "score": -5,
+      "grade": "C"
+    },
+    "WNW": {
+      "score": -5,
+      "grade": "C"
+    },
+    "NW": {
+      "score": -5,
+      "grade": "C"
+    },
+    "NNW": {
+      "score": -5,
+      "grade": "A"
+    },
+    "N": {
+      "score": -5,
+      "grade": "A"
+    },
+    "NNE": {
+      "score": -5,
+      "grade": "A"
+    }
+  },
+  "SKY ELEMENT": {
+    "NE": {
+      "score": -5,
+      "grade": "A"
+    },
+    "ENE": {
+      "score": -5,
+      "grade": "A"
+    },
+    "E": {
+      "score": -5,
+      "grade": "A"
+    },
+    "ESE": {
+      "score": -5,
+      "grade": "C"
+    },
+    "SE": {
+      "score": -5,
+      "grade": "A"
+    },
+    "SSE": {
+      "score": -5,
+      "grade": "A"
+    },
+    "S": {
+      "score": -5,
+      "grade": "A"
+    },
+    "SSW": {
+      "score": -5,
+      "grade": "C"
+    },
+    "SW": {
+      "score": -5,
+      "grade": "A"
+    },
+    "WSW": {
+      "score": 5,
+      "grade": "A"
+    },
+    "W": {
+      "score": 5,
+      "grade": "A"
+    },
+    "WNW": {
+      "score": 5,
+      "grade": "C"
+    },
+    "NW": {
+      "score": 5,
+      "grade": "A"
+    },
+    "NNW": {
+      "score": -5,
+      "grade": "A"
+    },
+    "N": {
+      "score": -5,
+      "grade": "A"
+    },
+    "NNE": {
+      "score": -5,
+      "grade": "A"
+    }
+  },
+  "WASHING MACHINE": {
+    "NE": {
+      "score": -10,
+      "grade": "A"
+    },
+    "ENE": {
+      "score": -10,
+      "grade": "A"
+    },
+    "E": {
+      "score": -10,
+      "grade": "A"
+    },
+    "ESE": {
+      "score": 10,
+      "grade": "A"
+    },
+    "SE": {
+      "score": -10,
+      "grade": "A"
+    },
+    "SSE": {
+      "score": -10,
+      "grade": "A"
+    },
+    "S": {
+      "score": -10,
+      "grade": "C"
+    },
+    "SSW": {
+      "score": 10,
+      "grade": "A"
+    },
+    "SW": {
+      "score": -10,
+      "grade": "C"
+    },
+    "WSW": {
+      "score": -10,
+      "grade": "A"
+    },
+    "W": {
+      "score": -10,
+      "grade": "A"
+    },
+    "WNW": {
+      "score": 10,
+      "grade": "A"
+    },
+    "NW": {
+      "score": -10,
+      "grade": "A"
+    },
+    "NNW": {
+      "score": -10,
+      "grade": "A"
+    },
+    "N": {
+      "score": -10,
+      "grade": "A"
+    },
+    "NNE": {
+      "score": -10,
+      "grade": "A"
+    }
+  },
+  "BOSS SITTING": {
+    "NE": {
+      "score": -10,
+      "grade": "C"
+    },
+    "ENE": {
+      "score": -10,
+      "grade": "C"
+    },
+    "E": {
+      "score": -10,
+      "grade": "C"
+    },
+    "ESE": {
+      "score": -10,
+      "grade": "A"
+    },
+    "SE": {
+      "score": -10,
+      "grade": "C"
+    },
+    "SSE": {
+      "score": -10,
+      "grade": "C"
+    },
+    "S": {
+      "score": 10,
+      "grade": "A"
+    },
+    "SSW": {
+      "score": -10,
+      "grade": "A"
+    },
+    "SW": {
+      "score": 10,
+      "grade": "A"
+    },
+    "WSW": {
+      "score": -10,
+      "grade": "C"
+    },
+    "W": {
+      "score": -10,
+      "grade": "C"
+    },
+    "WNW": {
+      "score": -10,
+      "grade": "A"
+    },
+    "NW": {
+      "score": -10,
+      "grade": "C"
+    },
+    "NNW": {
+      "score": -10,
+      "grade": "C"
+    },
+    "N": {
+      "score": -10,
+      "grade": "C"
+    },
+    "NNE": {
+      "score": -10,
+      "grade": "C"
+    }
+  },
+  "STAFF SITTING": {
+    "NE": {
+      "score": 10,
+      "grade": "C"
+    },
+    "ENE": {
+      "score": 10,
+      "grade": "C"
+    },
+    "E": {
+      "score": 10,
+      "grade": "C"
+    },
+    "ESE": {
+      "score": -10,
+      "grade": "A"
+    },
+    "SE": {
+      "score": 10,
+      "grade": "C"
+    },
+    "SSE": {
+      "score": 10,
+      "grade": "C"
+    },
+    "S": {
+      "score": -10,
+      "grade": "C"
+    },
+    "SSW": {
+      "score": -10,
+      "grade": "A"
+    },
+    "SW": {
+      "score": -10,
+      "grade": "C"
+    },
+    "WSW": {
+      "score": 10,
+      "grade": "C"
+    },
+    "W": {
+      "score": 10,
+      "grade": "C"
+    },
+    "WNW": {
+      "score": -10,
+      "grade": "A"
+    },
+    "NW": {
+      "score": 10,
+      "grade": "C"
+    },
+    "NNW": {
+      "score": 10,
+      "grade": "C"
+    },
+    "N": {
+      "score": 10,
+      "grade": "C"
+    },
+    "NNE": {
+      "score": 10,
+      "grade": "C"
+    }
+  },
+  "COMPUTER": {
+    "NE": {
+      "score": 10,
+      "grade": "C"
+    },
+    "ENE": {
+      "score": 10,
+      "grade": "A"
+    },
+    "E": {
+      "score": 10,
+      "grade": "A"
+    },
+    "ESE": {
+      "score": -10,
+      "grade": "A"
+    },
+    "SE": {
+      "score": 10,
+      "grade": "A"
+    },
+    "SSE": {
+      "score": 10,
+      "grade": "A"
+    },
+    "S": {
+      "score": 10,
+      "grade": "A"
+    },
+    "SSW": {
+      "score": -10,
+      "grade": "A"
+    },
+    "SW": {
+      "score": 10,
+      "grade": "A"
+    },
+    "WSW": {
+      "score": 10,
+      "grade": "C"
+    },
+    "W": {
+      "score": 10,
+      "grade": "C"
+    },
+    "WNW": {
+      "score": -10,
+      "grade": "A"
+    },
+    "NW": {
+      "score": 10,
+      "grade": "A"
+    },
+    "NNW": {
+      "score": 10,
+      "grade": "A"
+    },
+    "N": {
+      "score": 10,
+      "grade": "A"
+    },
+    "NNE": {
+      "score": 10,
+      "grade": "A"
+    }
+  },
+  "IMPORTANT PAPER": {
+    "NE": {
+      "score": 5,
+      "grade": "A"
+    },
+    "ENE": {
+      "score": -5,
+      "grade": "A"
+    },
+    "E": {
+      "score": -5,
+      "grade": "A"
+    },
+    "ESE": {
+      "score": -5,
+      "grade": "C"
+    },
+    "SE": {
+      "score": -5,
+      "grade": "C"
+    },
+    "SSE": {
+      "score": -5,
+      "grade": "C"
+    },
+    "S": {
+      "score": -5,
+      "grade": "A"
+    },
+    "SSW": {
+      "score": -5,
+      "grade": "A"
+    },
+    "SW": {
+      "score": -5,
+      "grade": "A"
+    },
+    "WSW": {
+      "score": 5,
+      "grade": "A"
+    },
+    "W": {
+      "score": 5,
+      "grade": "A"
+    },
+    "WNW": {
+      "score": -5,
+      "grade": "A"
+    },
+    "NW": {
+      "score": -5,
+      "grade": "C"
+    },
+    "NNW": {
+      "score": -5,
+      "grade": "A"
+    },
+    "N": {
+      "score": -5,
+      "grade": "A"
+    },
+    "NNE": {
+      "score": -5,
+      "grade": "A"
+    }
+  },
+  "SOFA SET": {
+    "NE": {
+      "score": -5,
+      "grade": "A"
+    },
+    "ENE": {
+      "score": -5,
+      "grade": "A"
+    },
+    "E": {
+      "score": -5,
+      "grade": "A"
+    },
+    "ESE": {
+      "score": 5,
+      "grade": "A"
+    },
+    "SE": {
+      "score": 5,
+      "grade": "C"
+    },
+    "SSE": {
+      "score": 5,
+      "grade": "C"
+    },
+    "S": {
+      "score": -5,
+      "grade": "C"
+    },
+    "SSW": {
+      "score": -5,
+      "grade": "A"
+    },
+    "SW": {
+      "score": -5,
+      "grade": "A"
+    },
+    "WSW": {
+      "score": -5,
+      "grade": "A"
+    },
+    "W": {
+      "score": -5,
+      "grade": "A"
+    },
+    "WNW": {
+      "score": -5,
+      "grade": "A"
+    },
+    "NW": {
+      "score": 5,
+      "grade": "A"
+    },
+    "NNW": {
+      "score": -5,
+      "grade": "A"
+    },
+    "N": {
+      "score": -5,
+      "grade": "A"
+    },
+    "NNE": {
+      "score": -5,
+      "grade": "A"
+    }
+  },
+  "MICROWAVE": {
+    "NE": {
+      "score": -5,
+      "grade": "C"
+    },
+    "ENE": {
+      "score": -5,
+      "grade": "C"
+    },
+    "E": {
+      "score": -5,
+      "grade": "A"
+    },
+    "ESE": {
+      "score": -5,
+      "grade": "A"
+    },
+    "SE": {
+      "score": 5,
+      "grade": "A"
+    },
+    "SSE": {
+      "score": 5,
+      "grade": "A"
+    },
+    "S": {
+      "score": 5,
+      "grade": "A"
+    },
+    "SSW": {
+      "score": -5,
+      "grade": "A"
+    },
+    "SW": {
+      "score": -5,
+      "grade": "A"
+    },
+    "WSW": {
+      "score": -5,
+      "grade": "A"
+    },
+    "W": {
+      "score": -5,
+      "grade": "A"
+    },
+    "WNW": {
+      "score": -5,
+      "grade": "A"
+    },
+    "NW": {
+      "score": -5,
+      "grade": "A"
+    },
+    "NNW": {
+      "score": -5,
+      "grade": "A"
+    },
+    "N": {
+      "score": -5,
+      "grade": "C"
+    },
+    "NNE": {
+      "score": -5,
+      "grade": "C"
+    }
+  },
+  "WATER TAP": {
+    "NE": {
+      "score": 5,
+      "grade": "C"
+    },
+    "ENE": {
+      "score": 5,
+      "grade": "C"
+    },
+    "E": {
+      "score": -5,
+      "grade": "A"
+    },
+    "ESE": {
+      "score": -5,
+      "grade": "A"
+    },
+    "SE": {
+      "score": -5,
+      "grade": "A"
+    },
+    "SSE": {
+      "score": -5,
+      "grade": "A"
+    },
+    "S": {
+      "score": -5,
+      "grade": "A"
+    },
+    "SSW": {
+      "score": -5,
+      "grade": "A"
+    },
+    "SW": {
+      "score": -5,
+      "grade": "A"
+    },
+    "WSW": {
+      "score": -5,
+      "grade": "A"
+    },
+    "W": {
+      "score": -5,
+      "grade": "A"
+    },
+    "WNW": {
+      "score": -5,
+      "grade": "A"
+    },
+    "NW": {
+      "score": -5,
+      "grade": "A"
+    },
+    "NNW": {
+      "score": -5,
+      "grade": "A"
+    },
+    "N": {
+      "score": 5,
+      "grade": "C"
+    },
+    "NNE": {
+      "score": 5,
+      "grade": "A"
+    }
+  },
+  "MIRROR": {
+    "NE": {
+      "score": 5,
+      "grade": "A"
+    },
+    "ENE": {
+      "score": 5,
+      "grade": "A"
+    },
+    "E": {
+      "score": -5,
+      "grade": "A"
+    },
+    "ESE": {
+      "score": -5,
+      "grade": "C"
+    },
+    "SE": {
+      "score": -5,
+      "grade": "C"
+    },
+    "SSE": {
+      "score": -5,
+      "grade": "A"
+    },
+    "S": {
+      "score": -5,
+      "grade": "A"
+    },
+    "SSW": {
+      "score": -5,
+      "grade": "A"
+    },
+    "SW": {
+      "score": -5,
+      "grade": "A"
+    },
+    "WSW": {
+      "score": -5,
+      "grade": "A"
+    },
+    "W": {
+      "score": -5,
+      "grade": "A"
+    },
+    "WNW": {
+      "score": -5,
+      "grade": "A"
+    },
+    "NW": {
+      "score": -5,
+      "grade": "A"
+    },
+    "NNW": {
+      "score": -5,
+      "grade": "A"
+    },
+    "N": {
+      "score": 5,
+      "grade": "A"
+    },
+    "NNE": {
+      "score": -5,
+      "grade": "A"
+    }
+  },
+  "RAW MATERIAL": {
+    "NE": {
+      "score": -5,
+      "grade": "A"
+    },
+    "ENE": {
+      "score": -5,
+      "grade": "A"
+    },
+    "E": {
+      "score": -5,
+      "grade": "A"
+    },
+    "ESE": {
+      "score": 5,
+      "grade": "A"
+    },
+    "SE": {
+      "score": 5,
+      "grade": "A"
+    },
+    "SSE": {
+      "score": -5,
+      "grade": "A"
+    },
+    "S": {
+      "score": -5,
+      "grade": "A"
+    },
+    "SSW": {
+      "score": -5,
+      "grade": "A"
+    },
+    "SW": {
+      "score": -5,
+      "grade": "A"
+    },
+    "WSW": {
+      "score": -5,
+      "grade": "A"
+    },
+    "W": {
+      "score": -5,
+      "grade": "A"
+    },
+    "WNW": {
+      "score": -5,
+      "grade": "A"
+    },
+    "NW": {
+      "score": -5,
+      "grade": "C"
+    },
+    "NNW": {
+      "score": -5,
+      "grade": "C"
+    },
+    "N": {
+      "score": -5,
+      "grade": "A"
+    },
+    "NNE": {
+      "score": -5,
+      "grade": "A"
+    }
+  },
+  "FINISH GOODS": {
+    "NE": {
+      "score": -5,
+      "grade": "A"
+    },
+    "ENE": {
+      "score": -5,
+      "grade": "A"
+    },
+    "E": {
+      "score": -5,
+      "grade": "A"
+    },
+    "ESE": {
+      "score": -5,
+      "grade": "C"
+    },
+    "SE": {
+      "score": -5,
+      "grade": "C"
+    },
+    "SSE": {
+      "score": -5,
+      "grade": "A"
+    },
+    "S": {
+      "score": -5,
+      "grade": "A"
+    },
+    "SSW": {
+      "score": -5,
+      "grade": "A"
+    },
+    "SW": {
+      "score": -5,
+      "grade": "A"
+    },
+    "WSW": {
+      "score": -5,
+      "grade": "A"
+    },
+    "W": {
+      "score": -5,
+      "grade": "C"
+    },
+    "WNW": {
+      "score": -5,
+      "grade": "C"
+    },
+    "NW": {
+      "score": 5,
+      "grade": "A"
+    },
+    "NNW": {
+      "score": 5,
+      "grade": "A"
+    },
+    "N": {
+      "score": -5,
+      "grade": "A"
+    },
+    "NNE": {
+      "score": -5,
+      "grade": "A"
+    }
+  }
+}

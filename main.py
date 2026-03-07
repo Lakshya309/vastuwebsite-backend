@@ -25,7 +25,7 @@ from pydantic import BaseModel, Field
 from shapely.geometry import Polygon, Point, MultiPolygon, box
 from shapely.affinity import scale as shapely_scale
 
-from vastu_rules import get_vastu_score_impact, get_vastu_verdict, Direction, VASTU_RULES
+from vastu_rules import get_vastu_score_impact, get_vastu_verdict, get_vastu_grade, get_vastu_remedy, Direction, VASTU_RULES
 
 # ======================================================
 # FASTAPI
@@ -70,6 +70,7 @@ class AnalyzedObjectResult(BaseModel):
     devta_region: Optional[str] = None
     zone16_direction: Optional[Direction] = None
     score_impact: int
+    grade: Optional[str] = None
     verdict: Literal["EXCELLENT", "GOOD", "BAD", "CRITICAL"]
     message: str
 
@@ -426,11 +427,12 @@ def analyze_objects(req: ObjectAnalysisRequest) -> VastuAnalysisResult:
     min_rule_score = 0
     has_rules = False
     for obj_type_rules in VASTU_RULES.values():
-        for score in obj_type_rules.values():
-            if score > max_rule_score:
-                max_rule_score = score
-            if score < min_rule_score:
-                min_rule_score = score
+        for rule_data in obj_type_rules.values():
+            score_val = rule_data.get("score", 0)
+            if score_val > max_rule_score:
+                max_rule_score = score_val
+            if score_val < min_rule_score:
+                min_rule_score = score_val
             has_rules = True
 
     if not has_rules:
@@ -478,13 +480,19 @@ def analyze_objects(req: ObjectAnalysisRequest) -> VastuAnalysisResult:
                         zone16_direction = zone_region.name
 
             score_impact = 0
+            grade: Optional[str] = None
             verdict: Literal["EXCELLENT", "GOOD", "BAD", "CRITICAL"] = "GOOD"
             message = "Placement analyzed."
 
             if zone16_direction:
                 score_impact = get_vastu_score_impact(obj.object_type, zone16_direction)
+                grade = get_vastu_grade(obj.object_type, zone16_direction)
                 verdict = get_vastu_verdict(score_impact)
-                if score_impact > 0:
+                
+                # Fetch detailed message based on grade/rules
+                if grade:
+                    message = get_vastu_remedy(obj.object_type, zone16_direction)
+                elif score_impact > 0:
                     message = f"Good placement for {obj.object_type} in {zone16_direction}."
                 elif score_impact < 0:
                     message = f"Problematic placement for {obj.object_type} in {zone16_direction}."
@@ -499,12 +507,17 @@ def analyze_objects(req: ObjectAnalysisRequest) -> VastuAnalysisResult:
                 if fallback_direction:
                     zone16_direction = fallback_direction
                     score_impact = get_vastu_score_impact(obj.object_type, zone16_direction)
+                    grade = get_vastu_grade(obj.object_type, zone16_direction)
                     verdict = get_vastu_verdict(score_impact)
-                    message = f"Zone by centroid fallback for {obj.object_type} in {zone16_direction}."
+                    if grade:
+                        message = get_vastu_remedy(obj.object_type, zone16_direction)
+                    else:
+                        message = f"Zone by centroid fallback for {obj.object_type} in {zone16_direction}."
                 else:
                     message = "Could not determine zone. Defaulting to neutral."
                     verdict = "BAD"
                     score_impact = 0
+                    grade = None
 
             analyzed_objects.append(AnalyzedObjectResult(
                 object_id=obj.id,
@@ -512,6 +525,7 @@ def analyze_objects(req: ObjectAnalysisRequest) -> VastuAnalysisResult:
                 devta_region=devta_name,
                 zone16_direction=zone16_direction,
                 score_impact=score_impact,
+                grade=grade,
                 verdict=verdict,
                 message=message
             ))
