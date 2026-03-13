@@ -93,6 +93,7 @@ class VastuAnalysisResult(BaseModel):
 class AnalysisRequest(BaseModel):
     boundary_normalized: List[PointModel]
     north_direction: float = Field(default=0.0)
+    grid_type: Literal["81", "64"] = Field(default="81")
 
 class ObjectAnalysisRequest(AnalysisRequest):
     placed_objects: List[PlacedObject]
@@ -110,21 +111,21 @@ class AnalysisResponse(BaseModel):
 CENTER_DEVTA = "Brahma"
 
 MIDDLE_DEVTAS = [
-    "Bhudhar", "Aap", "Aapvatsa",
-    "Aryama", "Savita", "Savitra",
-    "Vivasvan", "Indra", "Indrajaya",
-    "Mitra", "Rudra", "Rudrajaya"
+    "Bhudhar", "Apvats", "Aapvatsa",  # Note: text had Aap & Aapvatsa, image shows Apvats & Aapvatsa
+    "Aaryak", "Savitra", "Saavitra",  # Aryama -> Aaryak
+    "Vivasvan", "Indra", "Indraraj",  # Indrajaya -> Indraraj
+    "Mitra", "Rudra", "Rudrajay"      # Rudrajaya -> Rudrajay
 ]
 
 OUTER_DEVTAS = [
-    "Soma", "Bhujag", "Aditi", "Diti",
-    "Shikhi", "Parjanya", "Jayanta", "Mahendra",
-    "Surya", "Satya", "Bhrisha", "Antariksha",
-    "Agni", "Pusha", "Vitatha", "Gruhakshata",
-    "Yama", "Gandharva", "Bhringaraja", "Mriga",
-    "Pitru", "Dauvarika", "Sugriva", "Pushpadanta",
-    "Varuna", "Asura", "Shosha", "Papyakshama",
-    "Roga", "Naga", "Mukhya", "Bhallata"
+    "Som", "Sarp", "Aditi", "Uditi",           # Som/Soma, Sarp/Bhujag, Uditi/Diti
+    "Shikhi", "Parjanya", "Jayant", "Kulishayudh", # Mahendra -> Kulishayudh
+    "Surya", "Satya", "Bhrish", "Antriksh",
+    "Agni", "Pushaan", "Vitath", "Grahkshat",  # Pusha -> Pushaan, Gruhakshata -> Grahkshat
+    "Yama", "Gandharv", "Bhringraj", "Mrag",   # Mriga -> Mrag
+    "Pitra", "Dauvaarik", "Sugreev", "Pushpdant", # Pitru -> Pitra
+    "Varun", "Asur", "Shosh", "Paap",          # Papyakshama -> Paap
+    "Rog", "Naag", "Mukhya", "Bhallat"         # Roga -> Rog, Naga -> Naag
 ]
 
 ZONE_NAMES_16: List[Direction] = [
@@ -277,21 +278,63 @@ def largest_inner_rectangle(poly: Polygon) -> Polygon:
 # 45 DEVTA ENGINE
 # ======================================================
 
-def generate_45_devtas(poly: Polygon, north_base_rotation: float, tag: str = "traditional"):
+def generate_45_devtas(poly: Polygon, north_base_rotation: float, tag: str = "traditional", grid_type: str = "81"):
     """
     poly is in math coords (Y-up).
 
     Rotation rule:
-      ADD north_base_rotation to each base Vastu angle.
-      This rotates the whole mandala clockwise on the canvas by north_base_rotation degrees,
-      so that the mandala's North aligns with the plot's True North direction.
+      SUBTRACT north_base_rotation from each base Vastu angle.
+      This rotates the whole mandala counter-clockwise on the canvas by north_base_rotation degrees,
+      so that the mandala's North aligns with the plot's True North direction which visually spins CCW.
     """
     devtas = []
     center = visual_center(poly)
     did = 1
 
-    inner = shapely_scale(poly, 0.33, 0.33, origin=center)
-    middle = shapely_scale(poly, 0.66, 0.66, origin=center)
+    if grid_type == "64":
+        # 64-pada Manduka mandala
+        inner_scale = 1/4
+        middle_scale = 3/4
+        
+        # 64-pada proportions: Cardinal = 6 padas (67.5°), Diagonal = 1 pada (11.25°)
+        MIDDLE_DEVTA_ANGLES = [
+            ("Bhudhar", 326.25, 33.75),
+            ("Apvats", 33.75, 45.0),
+            ("Aapvatsa", 45.0, 56.25),
+            ("Aaryak", 56.25, 123.75),
+            ("Savitra", 123.75, 135.0),
+            ("Saavitra", 135.0, 146.25),
+            ("Vivasvan", 146.25, 213.75),
+            ("Indra", 213.75, 225.0),
+            ("Indraraj", 225.0, 236.25),
+            ("Mitra", 236.25, 303.75),
+            ("Rudrajay", 303.75, 315.0),
+            ("Rudra", 315.0, 326.25)
+        ]
+    else:
+        # Default 81-pada Paramasayika mandala
+        inner_scale = 1/3
+        middle_scale = 7/9
+        
+        # 81-pada Grid proportions: Cardinal devtas are 4 padas (45°), Diagonal are 2 padas (22.5°)
+        # North (0°) exactly splits Som and Sarp
+        MIDDLE_DEVTA_ANGLES = [
+            ("Bhudhar", 337.5, 22.5),
+            ("Apvats", 22.5, 45.0),
+            ("Aapvatsa", 45.0, 67.5),
+            ("Aaryak", 67.5, 112.5),
+            ("Savitra", 112.5, 135.0), 
+            ("Saavitra", 135.0, 157.5),
+            ("Vivasvan", 157.5, 202.5),
+            ("Indra", 202.5, 225.0),   
+            ("Indraraj", 225.0, 247.5),
+            ("Mitra", 247.5, 292.5),
+            ("Rudrajay", 292.5, 315.0),
+            ("Rudra", 315.0, 337.5)    
+        ]
+
+    inner = shapely_scale(poly, inner_scale, inner_scale, origin=center)
+    middle = shapely_scale(poly, middle_scale, middle_scale, origin=center)
 
     devtas.append(Region(
         id=f"d-{did}", name=CENTER_DEVTA,
@@ -301,15 +344,10 @@ def generate_45_devtas(poly: Polygon, north_base_rotation: float, tag: str = "tr
     did += 1
 
     # --- Middle ring: 12 devtas ---
-    step_mid = 360 / 12
-    absolute_start_middle = 345.0  # Bhudhar centered at North (0°)
 
-    for i, name in enumerate(MIDDLE_DEVTAS):
-        base_start = absolute_start_middle + i * step_mid
-        base_end = absolute_start_middle + (i + 1) * step_mid
-
-        start_angle = (base_start + north_base_rotation) % 360
-        end_angle = (base_end + north_base_rotation) % 360
+    for name, base_start, base_end in MIDDLE_DEVTA_ANGLES:
+        start_angle = (base_start - north_base_rotation) % 360
+        end_angle = (base_end - north_base_rotation) % 360
 
         w = angular_wedge(poly, center, start_angle, end_angle)
         if w:
@@ -327,14 +365,14 @@ def generate_45_devtas(poly: Polygon, north_base_rotation: float, tag: str = "tr
 
     # --- Outer ring: 32 devtas ---
     step_out = 360 / 32
-    absolute_start_outer = 354.375  # Soma centered at North (0°)
+    absolute_start_outer = 348.75  # Som starts at 348.75°, ending at 0° (North), so Sarp starts precisely on North
 
     for i, name in enumerate(OUTER_DEVTAS):
         base_start = absolute_start_outer + i * step_out
         base_end = absolute_start_outer + (i + 1) * step_out
 
-        start_angle = (base_start + north_base_rotation) % 360
-        end_angle = (base_end + north_base_rotation) % 360
+        start_angle = (base_start - north_base_rotation) % 360
+        end_angle = (base_end - north_base_rotation) % 360
 
         w = angular_wedge(poly, center, start_angle, end_angle)
         if w:
@@ -376,12 +414,13 @@ def generate_zones(
     elif label == "zone8":
         absolute_start = 22.5
 
+    # Similarly, subtract north_base_rotation for CCW rotation mapping
     for i, name in enumerate(names):
         base_start = absolute_start + i * step
         base_end = absolute_start + (i + 1) * step
 
-        start_angle = (base_start + north_base_rotation) % 360
-        end_angle = (base_end + north_base_rotation) % 360
+        start_angle = (base_start - north_base_rotation) % 360
+        end_angle = (base_end - north_base_rotation) % 360
 
         w = angular_wedge(poly, center, start_angle, end_angle)
         if w:
@@ -413,10 +452,10 @@ def analyze_objects(req: ObjectAnalysisRequest) -> VastuAnalysisResult:
         )
 
     if len(req.boundary_normalized) <= 4:
-        devtas45_regions = generate_45_devtas(outer_polygon, req.north_direction)
+        devtas45_regions = generate_45_devtas(outer_polygon, req.north_direction, "traditional", req.grid_type)
     else:
         core_polygon = largest_inner_rectangle(outer_polygon)
-        devtas45_regions = generate_45_devtas(core_polygon, req.north_direction, "traditional-core")
+        devtas45_regions = generate_45_devtas(core_polygon, req.north_direction, "traditional-core", req.grid_type)
 
     zones16_regions = generate_zones(outer_polygon, req.north_direction, ZONE_NAMES_16, "zone16")
 
@@ -633,10 +672,10 @@ def analyze_plot(req: AnalysisRequest) -> AnalysisResponse:
     center = visual_center(outer)                 # math coords (Y-up)
 
     if len(req.boundary_normalized) <= 4:
-        devtas = generate_45_devtas(outer, req.north_direction)
+        devtas = generate_45_devtas(outer, req.north_direction, "traditional", req.grid_type)
     else:
         core = largest_inner_rectangle(outer)
-        devtas = generate_45_devtas(core, req.north_direction, "traditional-core")
+        devtas = generate_45_devtas(core, req.north_direction, "traditional-core", req.grid_type)
 
     return AnalysisResponse(
         devtas45=devtas,
