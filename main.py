@@ -23,7 +23,8 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field
 from shapely.geometry import Polygon, Point, MultiPolygon, box
-from shapely.affinity import scale as shapely_scale
+from shapely.affinity import scale as shapely_scale, rotate as shapely_rotate
+from shapely.ops import unary_union
 
 from vastu_rules import get_vastu_score_impact, get_vastu_verdict, get_vastu_grade, get_vastu_remedy, Direction, VASTU_RULES
 
@@ -134,6 +135,22 @@ ZONE_NAMES_16: List[Direction] = [
 ]
 
 ZONE_NAMES_8 = ["NE", "E", "SE", "S", "SW", "W", "NW", "N"]
+
+# 81-pada Paramasayika Grid Mapping (9x9)
+# Row 0 = North boundary, Row 8 = South boundary
+# Col 0 = West boundary, Col 8 = East boundary
+# (Values match the order in OUTER_DEVTAS and MIDDLE_DEVTAS)
+DEVTA_GRID_81 = [
+    ["Rog",      "Naag",      "Mukhya",    "Bhallat",   "Som",       "Sarp",      "Aditi",     "Uditi",     "Shikhi"],
+    ["Paap",     "Rudra",     "Rudra",     "Bhudhar",   "Bhudhar",   "Bhudhar",   "Apvats",    "Apvats",    "Parjanya"],
+    ["Shosh",    "Rudrajay",  "Rudrajay",  "Bhudhar",   "Bhudhar",   "Bhudhar",   "Aapvatsa",  "Aapvatsa",  "Jayant"],
+    ["Asur",     "Mitra",     "Mitra",     "Brahma",    "Brahma",    "Brahma",    "Aaryak",    "Aaryak",    "Kulishayudh"],
+    ["Varun",    "Mitra",     "Mitra",     "Brahma",    "Brahma",    "Brahma",    "Aaryak",    "Aaryak",    "Surya"],
+    ["Pushpdant", "Mitra",     "Mitra",     "Brahma",    "Brahma",    "Brahma",    "Aaryak",    "Aaryak",    "Satya"],
+    ["Sugreev",  "Indra",     "Indra",     "Vivasvan",  "Vivasvan",  "Vivasvan",  "Savitra",   "Savitra",   "Bhrish"],
+    ["Dauvaarik", "Indraraj",  "Indraraj",  "Vivasvan",  "Vivasvan",  "Vivasvan",  "Saavitra",  "Saavitra",  "Antriksh"],
+    ["Pitra",    "Mrag",      "Bhringraj", "Gandharv",  "Yama",      "Grahkshat", "Vitath",    "Pushaan",   "Agni"]
+]
 
 # ======================================================
 # COORDINATE HELPERS
@@ -274,121 +291,223 @@ def largest_inner_rectangle(poly: Polygon) -> Polygon:
         return shapely_scale(poly, 0.7, 0.7, origin=visual_center(poly))
     return core
 
+
+def is_rectangular(poly: Polygon, north_base_rotation: float) -> bool:
+    """Detects if a plot is approximately rectangular."""
+    center = visual_center(poly)
+    # Align to north to check axis-aligned bounding box ratio
+    aligned = shapely_rotate(poly, -north_base_rotation, origin=center)
+    minx, miny, maxx, maxy = aligned.bounds
+    bbox_area = (maxx - minx) * (maxy - miny)
+    if bbox_area <= 0:
+        return False
+    
+    # Area ratio check
+    ratio = poly.area / bbox_area
+    
+    # Vertex count check (after simplification)
+    # Allow small curves/redundant points
+    simplified = poly.simplify(0.01)
+    vertex_count = len(simplified.exterior.coords) - 1
+    
+    return ratio > 0.95 and vertex_count == 4
+
 # ======================================================
 # 45 DEVTA ENGINE
 # ======================================================
 
-def generate_45_devtas(poly: Polygon, north_base_rotation: float, tag: str = "traditional", grid_type: str = "81"):
+def generate_grid_devtas(poly: Polygon, north_base_rotation: float, tag: str = "grid-81"):
     """
-    poly is in math coords (Y-up).
-
-    Rotation rule:
-      SUBTRACT north_base_rotation from each base Vastu angle.
-      This rotates the whole mandala counter-clockwise on the canvas by north_base_rotation degrees,
-      so that the mandala's North aligns with the plot's True North direction which visually spins CCW.
+    Generates 45 Devtas using a 9x9 grid approach with diagonal corner splits.
+    Refined: Merges middle-ring corner 2x2 blocks into single triangles.
     """
-    devtas = []
     center = visual_center(poly)
+    aligned_poly = shapely_rotate(poly, -north_base_rotation, origin=center)
+    minx, miny, maxx, maxy = aligned_poly.bounds
+    w, h = (maxx - minx) / 9, (maxy - miny) / 9
+
+    from shapely.geometry import LineString
+    from shapely.ops import split
+    
+    devta_polygons = {}
+
+    for r in range(9):
+        for c in range(9):
+            base_name = DEVTA_GRID_81[r][c]
+            cell = box(minx + c*w, maxy - (r+1)*h, minx + (c+1)*w, maxy - r*h)
+            p_to_add = []
+
+            # Corner blocks (3x3 blocks at indices 0-2 and 6-8)
+            is_nw = r < 3 and c < 3
+            is_ne = r < 3 and c > 5
+            is_sw = r > 5 and c < 3
+            is_se = r > 5 and c > 5
+
+            if is_nw:
+                line = LineString([(minx, maxy), (minx + 3*w, maxy - 3*h)])
+                parts = list(split(cell, line).geoms)
+                if len(parts) == 2:
+                    for p in parts:
+                        pc = p.centroid
+                        is_north = (pc.x - minx)/w > (maxy - pc.y)/h
+                        if r == 0 or c == 0: # Outer ring
+                            suffix = " (N)" if is_north else " (W)"
+                            p_to_add.append((p, base_name + suffix))
+                        else: # Middle ring: Unify 2x2 block into triangles
+                            name = "Rudra" if is_north else "Rudrajay"
+                            p_to_add.append((p, name))
+                else: p_to_add = [(cell, base_name)]
+            elif is_ne:
+                line = LineString([(maxx, maxy), (minx + 6*w, maxy - 3*h)])
+                parts = list(split(cell, line).geoms)
+                if len(parts) == 2:
+                    for p in parts:
+                        pc = p.centroid
+                        is_north = (maxx - pc.x)/w > (maxy - pc.y)/h
+                        if r == 0 or c == 8:
+                            suffix = " (N)" if is_north else " (E)"
+                            p_to_add.append((p, base_name + suffix))
+                        else:
+                            name = "Apvats" if is_north else "Aapvatsa"
+                            p_to_add.append((p, name))
+                else: p_to_add = [(cell, base_name)]
+            elif is_sw:
+                line = LineString([(minx, miny), (minx + 3*w, maxy - 6*h)])
+                parts = list(split(cell, line).geoms)
+                if len(parts) == 2:
+                    for p in parts:
+                        pc = p.centroid
+                        is_south = (pc.x - minx)/w > (pc.y - miny)/h
+                        if r == 8 or c == 0:
+                            suffix = " (S)" if is_south else " (W)"
+                            p_to_add.append((p, base_name + suffix))
+                        else:
+                            name = "Indraraj" if is_south else "Indra"
+                            p_to_add.append((p, name))
+                else: p_to_add = [(cell, base_name)]
+            elif is_se:
+                line = LineString([(maxx, miny), (minx + 6*w, maxy - 6*h)])
+                parts = list(split(cell, line).geoms)
+                if len(parts) == 2:
+                    for p in parts:
+                        pc = p.centroid
+                        is_south = (maxx - pc.x)/w > (pc.y - miny)/h
+                        if r == 8 or c == 8:
+                            suffix = " (S)" if is_south else " (E)"
+                            p_to_add.append((p, base_name + suffix))
+                        else:
+                            name = "Saavitra" if is_south else "Savitra"
+                            p_to_add.append((p, name))
+                else: p_to_add = [(cell, base_name)]
+            else:
+                p_to_add = [(cell, base_name)]
+
+            for poly_part, name in p_to_add:
+                if name not in devta_polygons: devta_polygons[name] = []
+                devta_polygons[name].append(poly_part)
+
+    regions = []
     did = 1
-
-    if grid_type == "64":
-        # 64-pada Manduka mandala
-        inner_scale = 1/4
-        middle_scale = 3/4
+    for name, polys in devta_polygons.items():
+        isect = unary_union(polys).intersection(aligned_poly)
+        if isect.is_empty: continue
         
-        # 64-pada proportions: Cardinal = 6 padas (67.5°), Diagonal = 1 pada (11.25°)
-        MIDDLE_DEVTA_ANGLES = [
-            ("Bhudhar", 326.25, 33.75),
-            ("Apvats", 33.75, 45.0),
-            ("Aapvatsa", 45.0, 56.25),
-            ("Aaryak", 56.25, 123.75),
-            ("Savitra", 123.75, 135.0),
-            ("Saavitra", 135.0, 146.25),
-            ("Vivasvan", 146.25, 213.75),
-            ("Indra", 213.75, 225.0),
-            ("Indraraj", 225.0, 236.25),
-            ("Mitra", 236.25, 303.75),
-            ("Rudrajay", 303.75, 315.0),
-            ("Rudra", 315.0, 326.25)
-        ]
+        final_poly = shapely_rotate(isect, north_base_rotation, origin=center)
+        ring = "outer"
+        if name == CENTER_DEVTA: ring = "center"
+        elif any(m in name for m in MIDDLE_DEVTAS): ring = "middle"
+            
+        regions.append(Region(
+            id=f"d-{did}", name=name,
+            polygon=to_points(final_poly),
+            ring=ring, source=tag
+        ))
+        did += 1
+    return regions
+
+
+def generate_angular_devtas(poly: Polygon, north_base_rotation: float, tag: str = "ring-grid"):
+    """
+    Generates 45 Devtas using a Concentric Ring-Grid approach for irregular plots.
+    Maintains 3:2:1 ring structure with proportional segments (54/18/11.25).
+    """
+    center = visual_center(poly)
+    
+    def get_ring_poly(inner_s, outer_s):
+        o = shapely_scale(poly, xfact=outer_s, yfact=outer_s, origin=center)
+        if inner_s == 0: return o
+        i = shapely_scale(poly, xfact=inner_s, yfact=inner_s, origin=center)
+        return o.difference(i)
+
+    # Ring 1: Brahma (1/3 scale)
+    brahma = get_ring_poly(0, 1/3)
+    regions = [Region(id="d-1", name=CENTER_DEVTA, polygon=to_points(brahma), ring="center", source=tag)]
+    did = 2
+
+    def create_and_intersect(ring_poly, divisions, ring_label):
+        nonlocal did
+        res = []
+        for name, start, end in divisions:
+            # We use angular_wedge to get a clean slice of the scaled plot ring
+            wedge = angular_wedge(poly, center, (start - north_base_rotation) % 360, (end - north_base_rotation) % 360)
+            if wedge:
+                isect = wedge.intersection(ring_poly)
+                if not isect.is_empty:
+                    res.append(Region(
+                        id=f"d-{did}", name=name, polygon=to_points(isect),
+                        ring=ring_label, source=tag,
+                        startAngle=normalize_angle(start), endAngle=normalize_angle(end)
+                    ))
+                    did += 1
+        return res
+
+    # Ring 2: Middle (1/3 to 7/9)
+    # Cardinal Major (54°), Corner Deity (18° each)
+    middle_ring = get_ring_poly(1/3, 7/9)
+    middle_divs = [
+        ("Bhudhar",   -27,  27),   # N (centered at 0)
+        ("Apvats",     27,  45),   # NE
+        ("Aapvatsa",   45,  63),
+        ("Aaryak",     63, 117),   # E (centered at 90)
+        ("Savitra",   117, 135),   # SE
+        ("Saavitra",  135, 153),
+        ("Vivasvan",  153, 207),   # S (centered at 180)
+        ("Indra",     207, 225),   # SW
+        ("Indraraj",  225, 243),
+        ("Mitra",     243, 297),   # W (centered at 270)
+        ("Rudra",     297, 315),   # NW
+        ("Rudrajay",  315, 333)
+    ]
+    regions.extend(create_and_intersect(middle_ring, middle_divs, "middle"))
+
+    # Ring 3: Outer (7/9 to 1.0)
+    # 32 Devtas (11.25° each)
+    outer_ring = get_ring_poly(7/9, 1.0)
+    outer_names = [
+        "Som", "Sarp", "Aditi", "Uditi", "Shikhi", "Parjanya", "Jayant", "Kulishayudh",
+        "Surya", "Satya", "Bhrish", "Antriksh", "Agni", "Pushaan", "Vitath", "Grahkshat",
+        "Yama", "Gandharv", "Bhringraj", "Mrag", "Pitra", "Dauvaarik", "Sugreev", "Pushpdant",
+        "Varun", "Asur", "Shosh", "Paap", "Rog", "Naag", "Mukhya", "Bhallat"
+    ]
+    outer_divs = []
+    # Center Som at 0 deg. Som is index 0.
+    for i, name in enumerate(outer_names):
+        start = i * 11.25 - 5.625
+        end = (i+1) * 11.25 - 5.625
+        outer_divs.append((name, start, end))
+    
+    regions.extend(create_and_intersect(outer_ring, outer_divs, "outer"))
+    
+    return regions
+
+
+def generate_45_devtas(poly: Polygon, north_base_rotation: float, grid_type: str = "81"):
+    """Hybrid controller for 45 Devtas."""
+    if is_rectangular(poly, north_base_rotation):
+        return generate_grid_devtas(poly, north_base_rotation, "grid-81")
     else:
-        # Default 81-pada Paramasayika mandala
-        inner_scale = 1/3
-        middle_scale = 7/9
-        
-        # 81-pada Grid proportions: Cardinal devtas are 4 padas (45°), Diagonal are 2 padas (22.5°)
-        # North (0°) exactly splits Som and Sarp
-        MIDDLE_DEVTA_ANGLES = [
-            ("Bhudhar", 337.5, 22.5),
-            ("Apvats", 22.5, 45.0),
-            ("Aapvatsa", 45.0, 67.5),
-            ("Aaryak", 67.5, 112.5),
-            ("Savitra", 112.5, 135.0), 
-            ("Saavitra", 135.0, 157.5),
-            ("Vivasvan", 157.5, 202.5),
-            ("Indra", 202.5, 225.0),   
-            ("Indraraj", 225.0, 247.5),
-            ("Mitra", 247.5, 292.5),
-            ("Rudrajay", 292.5, 315.0),
-            ("Rudra", 315.0, 337.5)    
-        ]
-
-    inner = shapely_scale(poly, inner_scale, inner_scale, origin=center)
-    middle = shapely_scale(poly, middle_scale, middle_scale, origin=center)
-
-    devtas.append(Region(
-        id=f"d-{did}", name=CENTER_DEVTA,
-        polygon=to_points(inner),
-        ring="center", source=tag
-    ))
-    did += 1
-
-    # --- Middle ring: 12 devtas ---
-
-    for name, base_start, base_end in MIDDLE_DEVTA_ANGLES:
-        start_angle = (base_start - north_base_rotation) % 360
-        end_angle = (base_end - north_base_rotation) % 360
-
-        w = angular_wedge(poly, center, start_angle, end_angle)
-        if w:
-            w = w.intersection(middle).difference(inner)
-            if not w.is_empty:
-                devtas.append(Region(
-                    id=f"d-{did}", name=name,
-                    polygon=to_points(w),
-                    ring="middle",
-                    startAngle=normalize_angle(start_angle),
-                    endAngle=normalize_angle(end_angle),
-                    source=tag
-                ))
-                did += 1
-
-    # --- Outer ring: 32 devtas ---
-    step_out = 360 / 32
-    absolute_start_outer = 348.75  # Som starts at 348.75°, ending at 0° (North), so Sarp starts precisely on North
-
-    for i, name in enumerate(OUTER_DEVTAS):
-        base_start = absolute_start_outer + i * step_out
-        base_end = absolute_start_outer + (i + 1) * step_out
-
-        start_angle = (base_start - north_base_rotation) % 360
-        end_angle = (base_end - north_base_rotation) % 360
-
-        w = angular_wedge(poly, center, start_angle, end_angle)
-        if w:
-            w = w.difference(middle)
-            if not w.is_empty:
-                devtas.append(Region(
-                    id=f"d-{did}", name=name,
-                    polygon=to_points(w),
-                    ring="outer",
-                    startAngle=normalize_angle(start_angle),
-                    endAngle=normalize_angle(end_angle),
-                    source=tag
-                ))
-                did += 1
-
-    return devtas
+        # For irregular plots, use angular approach to handle proportional cuts
+        return generate_angular_devtas(poly, north_base_rotation, "angular-hybrid")
 
 # ======================================================
 # 8 / 16 ZONE ENGINE
@@ -451,11 +570,9 @@ def analyze_objects(req: ObjectAnalysisRequest) -> VastuAnalysisResult:
             zones16=[]
         )
 
-    if len(req.boundary_normalized) <= 4:
-        devtas45_regions = generate_45_devtas(outer_polygon, req.north_direction, "traditional", req.grid_type)
-    else:
-        core_polygon = largest_inner_rectangle(outer_polygon)
-        devtas45_regions = generate_45_devtas(core_polygon, req.north_direction, "traditional-core", req.grid_type)
+    # Detected plot type and assign devtas using hybrid logic
+    # Rectacular -> Grid, Irregular/Concave -> Angular (Proportional cuts)
+    devtas45_regions = generate_45_devtas(outer_polygon, req.north_direction, req.grid_type)
 
     zones16_regions = generate_zones(outer_polygon, req.north_direction, ZONE_NAMES_16, "zone16")
 
@@ -671,11 +788,9 @@ def analyze_plot(req: AnalysisRequest) -> AnalysisResponse:
     outer = to_polygon(req.boundary_normalized)  # math coords (Y-up)
     center = visual_center(outer)                 # math coords (Y-up)
 
-    if len(req.boundary_normalized) <= 4:
-        devtas = generate_45_devtas(outer, req.north_direction, "traditional", req.grid_type)
-    else:
-        core = largest_inner_rectangle(outer)
-        devtas = generate_45_devtas(core, req.north_direction, "traditional-core", req.grid_type)
+    # Hybrid logic: Rectangular plots follow the 9x9 grid, 
+    # irregular plots use angular wedges to ensure proportional cuts.
+    devtas = generate_45_devtas(outer, req.north_direction, req.grid_type)
 
     return AnalysisResponse(
         devtas45=devtas,

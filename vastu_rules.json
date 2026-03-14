@@ -2,31 +2,31 @@
   "TOILET": {
     "NE": {
       "score": -50,
-      "grade": "C"
+      "grade": "B"
     },
     "ENE": {
       "score": -20,
-      "grade": "C"
+      "grade": "B"
     },
     "E": {
       "score": -20,
-      "grade": "C"
+      "grade": "B"
     },
     "ESE": {
       "score": 20,
-      "grade": "A"
+      "grade": "C"
     },
     "SE": {
       "score": -20,
-      "grade": "C"
+      "grade": "B"
     },
     "SSE": {
       "score": -20,
-      "grade": "C"
+      "grade": "B"
     },
     "S": {
       "score": -20,
-      "grade": "C"
+      "grade": "B"
     },
     "SSW": {
       "score": 20,
@@ -34,15 +34,15 @@
     },
     "SW": {
       "score": -10,
-      "grade": "C"
+      "grade": "A"
     },
     "WSW": {
       "score": -10,
-      "grade": "C"
+      "grade": "A"
     },
     "W": {
       "score": -10,
-      "grade": "C"
+      "grade": "A"
     },
     "WNW": {
       "score": 20,
@@ -50,49 +50,49 @@
     },
     "NW": {
       "score": -10,
-      "grade": "C"
+      "grade": "B"
     },
     "NNW": {
       "score": -10,
-      "grade": "C"
+      "grade": "B"
     },
     "N": {
       "score": -10,
-      "grade": "C"
+      "grade": "B"
     },
     "NNE": {
       "score": -10,
-      "grade": "C"
+      "grade": "B"
     }
   },
   "DINING ROOM": {
     "NE": {
       "score": 10,
-      "grade": "B"
+      "grade": "C"
     },
     "ENE": {
       "score": 10,
-      "grade": "B"
+      "grade": "C"
     },
     "E": {
       "score": 10,
-      "grade": "B"
+      "grade": "C"
     },
     "ESE": {
       "score": -10,
-      "grade": "C"
+      "grade": "A"
     },
     "SE": {
       "score": 10,
-      "grade": "B"
+      "grade": "C"
     },
     "SSE": {
       "score": 10,
-      "grade": "B"
+      "grade": "C"
     },
     "S": {
       "score": 10,
-      "grade": "B"
+      "grade": "C"
     },
     "SSW": {
       "score": 10,
@@ -100,15 +100,15 @@
     },
     "SW": {
       "score": 10,
-      "grade": "B"
+      "grade": "C"
     },
     "WSW": {
       "score": 10,
-      "grade": "B"
+      "grade": "C"
     },
     "W": {
       "score": 10,
-      "grade": "B"
+      "grade": "C"
     },
     "WNW": {
       "score": 10,
@@ -116,33 +116,33 @@
     },
     "NW": {
       "score": 10,
-      "grade": "B"
+      "grade": "C"
     },
     "NNW": {
       "score": 10,
-      "grade": "B"
+      "grade": "C"
     },
     "N": {
       "score": 10,
-      "grade": "B"
+      "grade": "C"
     },
     "NNE": {
       "score": 10,
-      "grade": "B"
+      "grade": "C"
     }
   },
   "SEPTIC TANK": {
     "NE": {
       "score": -20,
-      "grade": "C"
+      "grade": "B"
     },
     "ENE": {
       "score": -20,
-      "grade": "C"
+      "grade": "B"
     },
     "E": {
       "score": -20,
-      "grade": "C"
+      "grade": "B"
     },
     "ESE": {
       "score": 20,
@@ -150,51 +150,51 @@
     },
     "SE": {
       "score": -20,
-      "grade": "A"
+      "grade": "B"
     },
     "SSE": {
       "score": -20,
-      "grade": "C"
+      "grade": "B"
     },
     "S": {
       "score": -20,
-      "grade": "C"
+      "grade": "B"
     },
     "SSW": {
       "score": 20,
-      "grade": "A"
+      "grade": "C"
     },
     "SW": {
       "score": -20,
-      "grade": "C"
+      "grade": "B"
     },
     "WSW": {
       "score": -20,
-      "grade": "C"
+      "grade": "B"
     },
     "W": {
       "score": -20,
-      "grade": "C"
+      "grade": "B"
     },
     "WNW": {
       "score": 20,
-      "grade": "A"
+      "grade": "C"
     },
     "NW": {
       "score": -20,
-      "grade": "C"
+      "grade": "B"
     },
     "NNW": {
       "score": -20,
-      "grade": "C"
+      "grade": "B"
     },
     "N": {
       "score": -20,
-      "grade": "C"
+      "grade": "B"
     },
     "NNE": {
       "score": -20,
-      "grade": "C"
+      "grade": "B"
     }
   },
   "FAMILY LOUNGE": {
@@ -204,7 +204,7 @@
     },
     "ENE": {
       "score": 10,
-      "grade": "A"
+      "grade": "C"
     },
     "E": {
       "score": 10,
@@ -212,11 +212,11 @@
     },
     "ESE": {
       "score": 10,
-      "grade": "A"
+      "grade": "C"
     },
     "SE": {
       "score": -10,
-      "grade": "C"
+      "grade": "A"
     },
     "SSE": {
       "score": 10,
@@ -224,7 +224,7 @@
     },
     "S": {
       "score": 10,
-      "grade": "A"
+      "grade": "C"
     },
     "SSW": {
       "score": -10,
@@ -252,7 +252,7 @@
     },
     "NNW": {
       "score": 10,
-      "grade": "A"
+      "grade": "C"
     },
     "N": {
       "score": 10,
@@ -266,7 +266,7 @@
   "STUDY TABLE": {
     "NE": {
       "score": 10,
-      "grade": "A"
+      "grade": "C"
     },
     "ENE": {
       "score": -10,
@@ -274,15 +274,15 @@
     },
     "E": {
       "score": 10,
-      "grade": "A"
+      "grade": "C"
     },
     "ESE": {
       "score": -10,
-      "grade": "C"
+      "grade": "A"
     },
     "SE": {
       "score": 10,
-      "grade": "A"
+      "grade": "C"
     },
     "SSE": {
       "score": 10,
@@ -290,15 +290,15 @@
     },
     "S": {
       "score": -10,
-      "grade": "C"
+      "grade": "A"
     },
     "SSW": {
       "score": -10,
-      "grade": "C"
+      "grade": "A"
     },
     "SW": {
       "score": 10,
-      "grade": "A"
+      "grade": "C"
     },
     "WSW": {
       "score": 10,
@@ -310,7 +310,7 @@
     },
     "WNW": {
       "score": -10,
-      "grade": "C"
+      "grade": "A"
     },
     "NW": {
       "score": 10,
@@ -322,25 +322,25 @@
     },
     "N": {
       "score": 10,
-      "grade": "A"
+      "grade": "C"
     },
     "NNE": {
       "score": 10,
-      "grade": "A"
+      "grade": "C"
     }
   },
   "STORE ROOM": {
     "NE": {
       "score": -10,
-      "grade": "C"
+      "grade": "A"
     },
     "ENE": {
       "score": -10,
-      "grade": "C"
+      "grade": "A"
     },
     "E": {
       "score": -10,
-      "grade": "C"
+      "grade": "A"
     },
     "ESE": {
       "score": 10,
@@ -352,11 +352,11 @@
     },
     "SSE": {
       "score": 10,
-      "grade": "A"
+      "grade": "C"
     },
     "S": {
       "score": 10,
-      "grade": "A"
+      "grade": "C"
     },
     "SSW": {
       "score": 10,
@@ -368,11 +368,11 @@
     },
     "WSW": {
       "score": 10,
-      "grade": "A"
+      "grade": "C"
     },
     "W": {
       "score": 10,
-      "grade": "A"
+      "grade": "C"
     },
     "WNW": {
       "score": 10,
@@ -384,7 +384,7 @@
     },
     "NNW": {
       "score": -10,
-      "grade": "C"
+      "grade": "A"
     },
     "N": {
       "score": -10,
@@ -392,7 +392,7 @@
     },
     "NNE": {
       "score": -10,
-      "grade": "C"
+      "grade": "A"
     }
   },
   "SERVENT ROOM": {
@@ -410,7 +410,7 @@
     },
     "ESE": {
       "score": 10,
-      "grade": "A"
+      "grade": "C"
     },
     "SE": {
       "score": -10,
@@ -418,7 +418,7 @@
     },
     "SSE": {
       "score": -10,
-      "grade": "C"
+      "grade": "A"
     },
     "S": {
       "score": -10,
@@ -426,7 +426,7 @@
     },
     "SSW": {
       "score": 10,
-      "grade": "A"
+      "grade": "C"
     },
     "SW": {
       "score": -10,
@@ -434,7 +434,7 @@
     },
     "WSW": {
       "score": -10,
-      "grade": "C"
+      "grade": "A"
     },
     "W": {
       "score": -10,
@@ -446,7 +446,7 @@
     },
     "NW": {
       "score": 10,
-      "grade": "A"
+      "grade": "C"
     },
     "NNW": {
       "score": 10,
@@ -464,15 +464,15 @@
   "GUEST ROOM": {
     "NE": {
       "score": 10,
-      "grade": "A"
+      "grade": "C"
     },
     "ENE": {
       "score": 10,
-      "grade": "A"
+      "grade": "C"
     },
     "E": {
       "score": 10,
-      "grade": "A"
+      "grade": "C"
     },
     "ESE": {
       "score": -10,
@@ -484,7 +484,7 @@
     },
     "SSE": {
       "score": 10,
-      "grade": "A"
+      "grade": "C"
     },
     "S": {
       "score": -10,
@@ -492,7 +492,7 @@
     },
     "SSW": {
       "score": -10,
-      "grade": "C"
+      "grade": "A"
     },
     "SW": {
       "score": -10,
@@ -500,11 +500,11 @@
     },
     "WSW": {
       "score": 10,
-      "grade": "A"
+      "grade": "C"
     },
     "W": {
       "score": -10,
-      "grade": "C"
+      "grade": "A"
     },
     "WNW": {
       "score": 10,
@@ -512,7 +512,7 @@
     },
     "NW": {
       "score": -10,
-      "grade": "C"
+      "grade": "A"
     },
     "NNW": {
       "score": 10,
@@ -524,37 +524,37 @@
     },
     "NNE": {
       "score": 10,
-      "grade": "A"
+      "grade": "C"
     }
   },
   "BAR": {
     "NE": {
       "score": -10,
-      "grade": "B"
+      "grade": "A"
     },
     "ENE": {
       "score": -10,
-      "grade": "B"
+      "grade": "A"
     },
     "E": {
       "score": -10,
-      "grade": "B"
+      "grade": "A"
     },
     "ESE": {
       "score": -10,
-      "grade": "C"
+      "grade": "A"
     },
     "SE": {
       "score": -10,
-      "grade": "C"
+      "grade": "A"
     },
     "SSE": {
       "score": -10,
-      "grade": "B"
+      "grade": "A"
     },
     "S": {
       "score": -10,
-      "grade": "C"
+      "grade": "A"
     },
     "SSW": {
       "score": 10,
@@ -562,15 +562,15 @@
     },
     "SW": {
       "score": -10,
-      "grade": "C"
+      "grade": "A"
     },
     "WSW": {
       "score": -10,
-      "grade": "C"
+      "grade": "A"
     },
     "W": {
       "score": 10,
-      "grade": "B"
+      "grade": "C"
     },
     "WNW": {
       "score": 10,
@@ -582,111 +582,111 @@
     },
     "NNW": {
       "score": 10,
-      "grade": "B"
+      "grade": "C"
     },
     "N": {
       "score": -10,
-      "grade": "B"
+      "grade": "A"
     },
     "NNE": {
       "score": -10,
-      "grade": "B"
+      "grade": "A"
     }
   },
   "STAIRCASE": {
     "NE": {
       "score": -20,
-      "grade": "C"
+      "grade": "B"
     },
     "ENE": {
       "score": -20,
-      "grade": "C"
+      "grade": "B"
     },
     "E": {
       "score": -20,
-      "grade": "C"
+      "grade": "B"
     },
     "ESE": {
       "score": 10,
-      "grade": "A"
+      "grade": "C"
     },
     "SE": {
       "score": 10,
-      "grade": "A"
+      "grade": "C"
     },
     "SSE": {
       "score": -20,
-      "grade": "A"
+      "grade": "B"
     },
     "S": {
       "score": 10,
-      "grade": "A"
+      "grade": "C"
     },
     "SSW": {
       "score": 10,
-      "grade": "A"
+      "grade": "C"
     },
     "SW": {
       "score": 10,
-      "grade": "A"
+      "grade": "C"
     },
     "WSW": {
       "score": 10,
-      "grade": "A"
+      "grade": "C"
     },
     "W": {
       "score": -20,
-      "grade": "C"
+      "grade": "B"
     },
     "WNW": {
       "score": 10,
-      "grade": "A"
+      "grade": "C"
     },
     "NW": {
       "score": 10,
-      "grade": "A"
+      "grade": "C"
     },
     "NNW": {
       "score": -20,
-      "grade": "A"
+      "grade": "B"
     },
     "N": {
       "score": -20,
-      "grade": "C"
+      "grade": "B"
     },
     "NNE": {
       "score": -20,
-      "grade": "C"
+      "grade": "B"
     }
   },
   "POOJA": {
     "NE": {
       "score": 10,
-      "grade": "B"
+      "grade": "C"
     },
     "ENE": {
       "score": 10,
-      "grade": "B"
+      "grade": "C"
     },
     "E": {
       "score": 10,
-      "grade": "B"
+      "grade": "C"
     },
     "ESE": {
       "score": -10,
-      "grade": "B"
+      "grade": "A"
     },
     "SE": {
       "score": -10,
-      "grade": "C"
+      "grade": "A"
     },
     "SSE": {
       "score": -10,
-      "grade": "C"
+      "grade": "A"
     },
     "S": {
       "score": -10,
-      "grade": "C"
+      "grade": "A"
     },
     "SSW": {
       "score": -10,
@@ -702,7 +702,7 @@
     },
     "W": {
       "score": 10,
-      "grade": "A"
+      "grade": "C"
     },
     "WNW": {
       "score": -10,
@@ -710,7 +710,7 @@
     },
     "NW": {
       "score": -10,
-      "grade": "C"
+      "grade": "A"
     },
     "NNW": {
       "score": -10,
@@ -718,29 +718,29 @@
     },
     "N": {
       "score": 10,
-      "grade": "A"
+      "grade": "C"
     },
     "NNE": {
       "score": 10,
-      "grade": "A"
+      "grade": "C"
     }
   },
   "KITCHEN": {
     "NE": {
       "score": -20,
-      "grade": "A"
+      "grade": "B"
     },
     "ENE": {
       "score": -20,
-      "grade": "C"
+      "grade": "B"
     },
     "E": {
       "score": -20,
-      "grade": "C"
+      "grade": "B"
     },
     "ESE": {
       "score": -20,
-      "grade": "A"
+      "grade": "B"
     },
     "SE": {
       "score": 20,
@@ -756,19 +756,19 @@
     },
     "SSW": {
       "score": -10,
-      "grade": "C"
+      "grade": "A"
     },
     "SW": {
       "score": -10,
-      "grade": "C"
+      "grade": "A"
     },
     "WSW": {
       "score": -10,
-      "grade": "C"
+      "grade": "A"
     },
     "W": {
       "score": -10,
-      "grade": "C"
+      "grade": "A"
     },
     "WNW": {
       "score": -10,
@@ -784,11 +784,11 @@
     },
     "N": {
       "score": -10,
-      "grade": "C"
+      "grade": "A"
     },
     "NNE": {
       "score": -10,
-      "grade": "C"
+      "grade": "A"
     }
   },
   "MUSIC SYSTEM": {
@@ -798,15 +798,15 @@
     },
     "ENE": {
       "score": 5,
-      "grade": "A"
+      "grade": "C"
     },
     "E": {
       "score": 5,
-      "grade": "A"
+      "grade": "C"
     },
     "ESE": {
       "score": -5,
-      "grade": "C"
+      "grade": "A"
     },
     "SE": {
       "score": 5,
@@ -814,31 +814,31 @@
     },
     "SSE": {
       "score": 5,
-      "grade": "A"
+      "grade": "C"
     },
     "S": {
       "score": 5,
-      "grade": "A"
+      "grade": "C"
     },
     "SSW": {
       "score": 5,
-      "grade": "A"
+      "grade": "C"
     },
     "SW": {
       "score": 5,
-      "grade": "A"
+      "grade": "C"
     },
     "WSW": {
       "score": 5,
-      "grade": "A"
+      "grade": "C"
     },
     "W": {
       "score": 5,
-      "grade": "A"
+      "grade": "C"
     },
     "WNW": {
       "score": -5,
-      "grade": "C"
+      "grade": "A"
     },
     "NW": {
       "score": 5,
@@ -850,11 +850,11 @@
     },
     "N": {
       "score": 5,
-      "grade": "A"
+      "grade": "C"
     },
     "NNE": {
       "score": 5,
-      "grade": "A"
+      "grade": "C"
     }
   },
   "INVETER": {
@@ -868,11 +868,11 @@
     },
     "E": {
       "score": -5,
-      "grade": "C"
+      "grade": "A"
     },
     "ESE": {
       "score": 5,
-      "grade": "A"
+      "grade": "C"
     },
     "SE": {
       "score": 5,
@@ -884,7 +884,7 @@
     },
     "S": {
       "score": -5,
-      "grade": "C"
+      "grade": "A"
     },
     "SSW": {
       "score": -5,
@@ -900,7 +900,7 @@
     },
     "W": {
       "score": -5,
-      "grade": "C"
+      "grade": "A"
     },
     "WNW": {
       "score": 5,
@@ -908,7 +908,7 @@
     },
     "NW": {
       "score": 5,
-      "grade": "A"
+      "grade": "C"
     },
     "NNW": {
       "score": -5,
@@ -930,23 +930,23 @@
     },
     "ENE": {
       "score": -10,
-      "grade": "C"
+      "grade": "A"
     },
     "E": {
       "score": 10,
-      "grade": "A"
+      "grade": "C"
     },
     "ESE": {
       "score": -10,
-      "grade": "C"
+      "grade": "A"
     },
     "SE": {
       "score": 10,
-      "grade": "A"
+      "grade": "C"
     },
     "SSE": {
       "score": -10,
-      "grade": "C"
+      "grade": "A"
     },
     "S": {
       "score": 10,
@@ -954,7 +954,7 @@
     },
     "SSW": {
       "score": -10,
-      "grade": "C"
+      "grade": "A"
     },
     "SW": {
       "score": -10,
@@ -974,7 +974,7 @@
     },
     "NW": {
       "score": -10,
-      "grade": "C"
+      "grade": "A"
     },
     "NNW": {
       "score": -10,
@@ -982,11 +982,11 @@
     },
     "N": {
       "score": -10,
-      "grade": "C"
+      "grade": "A"
     },
     "NNE": {
       "score": -10,
-      "grade": "C"
+      "grade": "A"
     }
   },
   "AIR CONDITIONER": {
@@ -996,15 +996,15 @@
     },
     "ENE": {
       "score": 10,
-      "grade": "A"
+      "grade": "C"
     },
     "E": {
       "score": -10,
-      "grade": "C"
+      "grade": "A"
     },
     "ESE": {
       "score": 10,
-      "grade": "A"
+      "grade": "C"
     },
     "SE": {
       "score": -10,
@@ -1012,7 +1012,7 @@
     },
     "SSE": {
       "score": 10,
-      "grade": "A"
+      "grade": "C"
     },
     "S": {
       "score": 10,
@@ -1020,11 +1020,11 @@
     },
     "SSW": {
       "score": 10,
-      "grade": "A"
+      "grade": "C"
     },
     "SW": {
       "score": -10,
-      "grade": "C"
+      "grade": "A"
     },
     "WSW": {
       "score": -10,
@@ -1036,11 +1036,11 @@
     },
     "WNW": {
       "score": 10,
-      "grade": "A"
+      "grade": "C"
     },
     "NW": {
       "score": 10,
-      "grade": "A"
+      "grade": "C"
     },
     "NNW": {
       "score": -10,
@@ -1052,13 +1052,13 @@
     },
     "NNE": {
       "score": 10,
-      "grade": "A"
+      "grade": "C"
     }
   },
   "MASTER BEDROOM": {
     "NE": {
       "score": -10,
-      "grade": "C"
+      "grade": "A"
     },
     "ENE": {
       "score": -10,
@@ -1090,7 +1090,7 @@
     },
     "SW": {
       "score": 20,
-      "grade": "A"
+      "grade": "C"
     },
     "WSW": {
       "score": -10,
@@ -1148,7 +1148,7 @@
     },
     "S": {
       "score": 5,
-      "grade": "A"
+      "grade": "C"
     },
     "SSW": {
       "score": -10,
@@ -1164,7 +1164,7 @@
     },
     "W": {
       "score": 10,
-      "grade": "A"
+      "grade": "C"
     },
     "WNW": {
       "score": -10,
@@ -1172,7 +1172,7 @@
     },
     "NW": {
       "score": -10,
-      "grade": "C"
+      "grade": "A"
     },
     "NNW": {
       "score": -10,
@@ -1180,7 +1180,7 @@
     },
     "N": {
       "score": 10,
-      "grade": "A"
+      "grade": "C"
     },
     "NNE": {
       "score": -10,
@@ -1190,23 +1190,23 @@
   "CHILDREN BEDROOM": {
     "NE": {
       "score": 10,
-      "grade": "B"
+      "grade": "C"
     },
     "ENE": {
       "score": -10,
-      "grade": "B"
+      "grade": "A"
     },
     "E": {
       "score": 10,
-      "grade": "B"
+      "grade": "C"
     },
     "ESE": {
       "score": -10,
-      "grade": "C"
+      "grade": "A"
     },
     "SE": {
       "score": -10,
-      "grade": "C"
+      "grade": "A"
     },
     "SSE": {
       "score": -10,
@@ -1234,7 +1234,7 @@
     },
     "WNW": {
       "score": -10,
-      "grade": "C"
+      "grade": "A"
     },
     "NW": {
       "score": 10,
@@ -1256,19 +1256,19 @@
   "LIFT": {
     "NE": {
       "score": -20,
-      "grade": "A"
+      "grade": "B"
     },
     "ENE": {
       "score": -20,
-      "grade": "A"
+      "grade": "B"
     },
     "E": {
       "score": -10,
-      "grade": "A"
+      "grade": "B"
     },
     "ESE": {
       "score": 10,
-      "grade": "A"
+      "grade": "C"
     },
     "SE": {
       "score": 10,
@@ -1276,11 +1276,11 @@
     },
     "SSE": {
       "score": -10,
-      "grade": "C"
+      "grade": "A"
     },
     "S": {
       "score": -10,
-      "grade": "C"
+      "grade": "A"
     },
     "SSW": {
       "score": -10,
@@ -1288,23 +1288,23 @@
     },
     "SW": {
       "score": -10,
-      "grade": "C"
+      "grade": "A"
     },
     "WSW": {
       "score": -10,
-      "grade": "C"
+      "grade": "A"
     },
     "W": {
       "score": -10,
-      "grade": "C"
+      "grade": "A"
     },
     "WNW": {
       "score": 10,
-      "grade": "A"
+      "grade": "C"
     },
     "NW": {
       "score": 10,
-      "grade": "A"
+      "grade": "C"
     },
     "NNW": {
       "score": -10,
@@ -1322,15 +1322,15 @@
   "CUPBAORD": {
     "NE": {
       "score": -10,
-      "grade": "C"
+      "grade": "A"
     },
     "ENE": {
       "score": -10,
-      "grade": "C"
+      "grade": "A"
     },
     "E": {
       "score": -10,
-      "grade": "C"
+      "grade": "A"
     },
     "ESE": {
       "score": -10,
@@ -1338,15 +1338,15 @@
     },
     "SE": {
       "score": 10,
-      "grade": "A"
+      "grade": "C"
     },
     "SSE": {
       "score": 10,
-      "grade": "A"
+      "grade": "C"
     },
     "S": {
       "score": 10,
-      "grade": "A"
+      "grade": "C"
     },
     "SSW": {
       "score": -10,
@@ -1354,15 +1354,15 @@
     },
     "SW": {
       "score": 5,
-      "grade": "A"
+      "grade": "C"
     },
     "WSW": {
       "score": 5,
-      "grade": "A"
+      "grade": "C"
     },
     "W": {
       "score": 5,
-      "grade": "A"
+      "grade": "C"
     },
     "WNW": {
       "score": -10,
@@ -1374,49 +1374,49 @@
     },
     "NNW": {
       "score": -10,
-      "grade": "C"
+      "grade": "A"
     },
     "N": {
       "score": -10,
-      "grade": "C"
+      "grade": "A"
     },
     "NNE": {
       "score": -10,
-      "grade": "C"
+      "grade": "A"
     }
   },
   "DRESSING TABLE": {
     "NE": {
       "score": 10,
-      "grade": "A"
+      "grade": "C"
     },
     "ENE": {
       "score": 10,
-      "grade": "A"
+      "grade": "C"
     },
     "E": {
       "score": 10,
-      "grade": "A"
+      "grade": "C"
     },
     "ESE": {
       "score": -10,
-      "grade": "C"
+      "grade": "A"
     },
     "SE": {
       "score": -10,
-      "grade": "C"
+      "grade": "A"
     },
     "SSE": {
       "score": -10,
-      "grade": "C"
+      "grade": "A"
     },
     "S": {
       "score": -10,
-      "grade": "C"
+      "grade": "A"
     },
     "SSW": {
       "score": -10,
-      "grade": "C"
+      "grade": "A"
     },
     "SW": {
       "score": -10,
@@ -1424,19 +1424,19 @@
     },
     "WSW": {
       "score": -10,
-      "grade": "C"
+      "grade": "A"
     },
     "W": {
       "score": -10,
-      "grade": "C"
+      "grade": "A"
     },
     "WNW": {
       "score": -10,
-      "grade": "C"
+      "grade": "A"
     },
     "NW": {
       "score": -10,
-      "grade": "C"
+      "grade": "A"
     },
     "NNW": {
       "score": 10,
@@ -1444,11 +1444,11 @@
     },
     "N": {
       "score": 10,
-      "grade": "A"
+      "grade": "C"
     },
     "NNE": {
       "score": 10,
-      "grade": "A"
+      "grade": "C"
     }
   },
   "FOOTWEAR RANK": {
@@ -1470,7 +1470,7 @@
     },
     "SE": {
       "score": 10,
-      "grade": "A"
+      "grade": "C"
     },
     "SSE": {
       "score": 10,
@@ -1482,11 +1482,11 @@
     },
     "SSW": {
       "score": 10,
-      "grade": "A"
+      "grade": "C"
     },
     "SW": {
       "score": -10,
-      "grade": "C"
+      "grade": "A"
     },
     "WSW": {
       "score": 10,
@@ -1532,7 +1532,7 @@
     },
     "ESE": {
       "score": 5,
-      "grade": "A"
+      "grade": "C"
     },
     "SE": {
       "score": -5,
@@ -1540,7 +1540,7 @@
     },
     "SSE": {
       "score": 5,
-      "grade": "A"
+      "grade": "C"
     },
     "S": {
       "score": 5,
@@ -1552,11 +1552,11 @@
     },
     "SW": {
       "score": 5,
-      "grade": "A"
+      "grade": "C"
     },
     "WSW": {
       "score": 5,
-      "grade": "A"
+      "grade": "C"
     },
     "W": {
       "score": 5,
@@ -1564,17 +1564,21 @@
     },
     "WNW": {
       "score": 5,
-      "grade": "A"
+      "grade": "C"
     },
     "NW": {
       "score": 5,
-      "grade": "A"
+      "grade": "C"
     },
     "NNW": {
       "score": 5,
-      "grade": "A"
+      "grade": "C"
     },
     "N": {
+      "score": -5,
+      "grade": "A"
+    },
+    "NNE": {
       "score": -5,
       "grade": "A"
     }
@@ -1606,7 +1610,7 @@
     },
     "S": {
       "score": 10,
-      "grade": "B"
+      "grade": "C"
     },
     "SSW": {
       "score": -10,
@@ -1614,7 +1618,7 @@
     },
     "SW": {
       "score": -10,
-      "grade": "C"
+      "grade": "A"
     },
     "WSW": {
       "score": -10,
@@ -1652,7 +1656,7 @@
     },
     "ENE": {
       "score": -10,
-      "grade": "C"
+      "grade": "A"
     },
     "E": {
       "score": -10,
@@ -1671,8 +1675,8 @@
       "grade": "A"
     },
     "S": {
-      "score": 10,
-      "grade": "A"
+      "score": -10,
+      "grade": "B"
     },
     "SSW": {
       "score": -10,
@@ -1680,7 +1684,7 @@
     },
     "SW": {
       "score": 10,
-      "grade": "A"
+      "grade": "C"
     },
     "WSW": {
       "score": -10,
@@ -1688,7 +1692,7 @@
     },
     "W": {
       "score": 10,
-      "grade": "A"
+      "grade": "C"
     },
     "WNW": {
       "score": -10,
@@ -1700,11 +1704,11 @@
     },
     "NNW": {
       "score": -10,
-      "grade": "C"
+      "grade": "A"
     },
     "N": {
       "score": -10,
-      "grade": "C"
+      "grade": "A"
     },
     "NNE": {
       "score": -10,
@@ -1718,7 +1722,7 @@
     },
     "ENE": {
       "score": 10,
-      "grade": "A"
+      "grade": "C"
     },
     "E": {
       "score": -10,
@@ -1726,7 +1730,7 @@
     },
     "ESE": {
       "score": -10,
-      "grade": "C"
+      "grade": "A"
     },
     "SE": {
       "score": -10,
@@ -1742,7 +1746,7 @@
     },
     "SSW": {
       "score": -10,
-      "grade": "C"
+      "grade": "A"
     },
     "SW": {
       "score": -10,
@@ -1758,7 +1762,7 @@
     },
     "WNW": {
       "score": -10,
-      "grade": "C"
+      "grade": "A"
     },
     "NW": {
       "score": -10,
@@ -1766,11 +1770,11 @@
     },
     "NNW": {
       "score": 10,
-      "grade": "A"
+      "grade": "C"
     },
     "N": {
       "score": 10,
-      "grade": "A"
+      "grade": "C"
     },
     "NNE": {
       "score": -10,
@@ -1780,7 +1784,7 @@
   "WASTE MATERIAL": {
     "NE": {
       "score": -10,
-      "grade": "C"
+      "grade": "A"
     },
     "ENE": {
       "score": -10,
@@ -1792,7 +1796,7 @@
     },
     "ESE": {
       "score": 10,
-      "grade": "A"
+      "grade": "C"
     },
     "SE": {
       "score": -10,
@@ -1808,7 +1812,7 @@
     },
     "SSW": {
       "score": 10,
-      "grade": "A"
+      "grade": "C"
     },
     "SW": {
       "score": -10,
@@ -1824,7 +1828,7 @@
     },
     "WNW": {
       "score": 10,
-      "grade": "A"
+      "grade": "C"
     },
     "NW": {
       "score": -10,
@@ -1832,33 +1836,33 @@
     },
     "NNW": {
       "score": -10,
-      "grade": "C"
+      "grade": "A"
     },
     "N": {
       "score": -10,
-      "grade": "C"
+      "grade": "A"
     },
     "NNE": {
       "score": -10,
-      "grade": "C"
+      "grade": "A"
     }
   },
   "WATER ELEMENT": {
     "NE": {
       "score": 5,
-      "grade": "A"
+      "grade": "C"
     },
     "ENE": {
       "score": -5,
-      "grade": "C"
+      "grade": "A"
     },
     "E": {
       "score": -5,
-      "grade": "C"
+      "grade": "A"
     },
     "ESE": {
       "score": -5,
-      "grade": "C"
+      "grade": "A"
     },
     "SE": {
       "score": -5,
@@ -1898,15 +1902,15 @@
     },
     "NNW": {
       "score": 5,
-      "grade": "A"
+      "grade": "C"
     },
     "N": {
       "score": 5,
-      "grade": "A"
+      "grade": "C"
     },
     "NNE": {
       "score": 5,
-      "grade": "A"
+      "grade": "C"
     }
   },
   "AIR ELEMENT": {
@@ -1916,27 +1920,27 @@
     },
     "ENE": {
       "score": 5,
-      "grade": "A"
+      "grade": "C"
     },
     "E": {
       "score": 5,
-      "grade": "A"
+      "grade": "C"
     },
     "ESE": {
       "score": 5,
-      "grade": "A"
+      "grade": "C"
     },
     "SE": {
       "score": -5,
-      "grade": "C"
+      "grade": "A"
     },
     "SSE": {
       "score": -5,
-      "grade": "C"
+      "grade": "A"
     },
     "S": {
       "score": -5,
-      "grade": "C"
+      "grade": "A"
     },
     "SSW": {
       "score": -5,
@@ -1994,23 +1998,23 @@
     },
     "SE": {
       "score": 5,
-      "grade": "A"
+      "grade": "C"
     },
     "SSE": {
       "score": 5,
-      "grade": "A"
+      "grade": "C"
     },
     "S": {
       "score": 5,
-      "grade": "A"
+      "grade": "C"
     },
     "SSW": {
       "score": -5,
-      "grade": "C"
+      "grade": "A"
     },
     "SW": {
       "score": -5,
-      "grade": "C"
+      "grade": "A"
     },
     "WSW": {
       "score": -5,
@@ -2072,27 +2076,27 @@
     },
     "SSW": {
       "score": 5,
-      "grade": "A"
+      "grade": "C"
     },
     "SW": {
       "score": 5,
-      "grade": "A"
+      "grade": "C"
     },
     "WSW": {
       "score": -5,
-      "grade": "C"
+      "grade": "A"
     },
     "W": {
       "score": -5,
-      "grade": "C"
+      "grade": "A"
     },
     "WNW": {
       "score": -5,
-      "grade": "C"
+      "grade": "A"
     },
     "NW": {
       "score": -5,
-      "grade": "C"
+      "grade": "A"
     },
     "NNW": {
       "score": -5,
@@ -2122,7 +2126,7 @@
     },
     "ESE": {
       "score": -5,
-      "grade": "C"
+      "grade": "A"
     },
     "SE": {
       "score": -5,
@@ -2138,7 +2142,7 @@
     },
     "SSW": {
       "score": -5,
-      "grade": "C"
+      "grade": "A"
     },
     "SW": {
       "score": -5,
@@ -2146,11 +2150,11 @@
     },
     "WSW": {
       "score": 5,
-      "grade": "A"
+      "grade": "C"
     },
     "W": {
       "score": 5,
-      "grade": "A"
+      "grade": "C"
     },
     "WNW": {
       "score": 5,
@@ -2158,7 +2162,7 @@
     },
     "NW": {
       "score": 5,
-      "grade": "A"
+      "grade": "C"
     },
     "NNW": {
       "score": -5,
@@ -2188,7 +2192,7 @@
     },
     "ESE": {
       "score": 10,
-      "grade": "A"
+      "grade": "C"
     },
     "SE": {
       "score": -10,
@@ -2200,15 +2204,15 @@
     },
     "S": {
       "score": -10,
-      "grade": "C"
+      "grade": "A"
     },
     "SSW": {
       "score": 10,
-      "grade": "A"
+      "grade": "C"
     },
     "SW": {
       "score": -10,
-      "grade": "C"
+      "grade": "A"
     },
     "WSW": {
       "score": -10,
@@ -2220,7 +2224,7 @@
     },
     "WNW": {
       "score": 10,
-      "grade": "A"
+      "grade": "C"
     },
     "NW": {
       "score": -10,
@@ -2242,15 +2246,15 @@
   "BOSS SITTING": {
     "NE": {
       "score": -10,
-      "grade": "C"
+      "grade": "A"
     },
     "ENE": {
       "score": -10,
-      "grade": "C"
+      "grade": "A"
     },
     "E": {
       "score": -10,
-      "grade": "C"
+      "grade": "A"
     },
     "ESE": {
       "score": -10,
@@ -2258,15 +2262,15 @@
     },
     "SE": {
       "score": -10,
-      "grade": "C"
+      "grade": "A"
     },
     "SSE": {
       "score": -10,
-      "grade": "C"
+      "grade": "A"
     },
     "S": {
       "score": 10,
-      "grade": "A"
+      "grade": "C"
     },
     "SSW": {
       "score": -10,
@@ -2274,15 +2278,15 @@
     },
     "SW": {
       "score": 10,
-      "grade": "A"
+      "grade": "C"
     },
     "WSW": {
       "score": -10,
-      "grade": "C"
+      "grade": "A"
     },
     "W": {
       "score": -10,
-      "grade": "C"
+      "grade": "A"
     },
     "WNW": {
       "score": -10,
@@ -2290,19 +2294,19 @@
     },
     "NW": {
       "score": -10,
-      "grade": "C"
+      "grade": "A"
     },
     "NNW": {
       "score": -10,
-      "grade": "C"
+      "grade": "A"
     },
     "N": {
       "score": -10,
-      "grade": "C"
+      "grade": "A"
     },
     "NNE": {
       "score": -10,
-      "grade": "C"
+      "grade": "A"
     }
   },
   "STAFF SITTING": {
@@ -2332,7 +2336,7 @@
     },
     "S": {
       "score": -10,
-      "grade": "C"
+      "grade": "A"
     },
     "SSW": {
       "score": -10,
@@ -2340,7 +2344,7 @@
     },
     "SW": {
       "score": -10,
-      "grade": "C"
+      "grade": "A"
     },
     "WSW": {
       "score": 10,
@@ -2378,11 +2382,11 @@
     },
     "ENE": {
       "score": 10,
-      "grade": "A"
+      "grade": "C"
     },
     "E": {
       "score": 10,
-      "grade": "A"
+      "grade": "C"
     },
     "ESE": {
       "score": -10,
@@ -2390,15 +2394,15 @@
     },
     "SE": {
       "score": 10,
-      "grade": "A"
+      "grade": "C"
     },
     "SSE": {
       "score": 10,
-      "grade": "A"
+      "grade": "C"
     },
     "S": {
       "score": 10,
-      "grade": "A"
+      "grade": "C"
     },
     "SSW": {
       "score": -10,
@@ -2406,7 +2410,7 @@
     },
     "SW": {
       "score": 10,
-      "grade": "A"
+      "grade": "C"
     },
     "WSW": {
       "score": 10,
@@ -2422,25 +2426,25 @@
     },
     "NW": {
       "score": 10,
-      "grade": "A"
+      "grade": "C"
     },
     "NNW": {
       "score": 10,
-      "grade": "A"
+      "grade": "C"
     },
     "N": {
       "score": 10,
-      "grade": "A"
+      "grade": "C"
     },
     "NNE": {
       "score": 10,
-      "grade": "A"
+      "grade": "C"
     }
   },
   "IMPORTANT PAPER": {
     "NE": {
       "score": 5,
-      "grade": "A"
+      "grade": "C"
     },
     "ENE": {
       "score": -5,
@@ -2452,15 +2456,15 @@
     },
     "ESE": {
       "score": -5,
-      "grade": "C"
+      "grade": "A"
     },
     "SE": {
       "score": -5,
-      "grade": "C"
+      "grade": "A"
     },
     "SSE": {
       "score": -5,
-      "grade": "C"
+      "grade": "A"
     },
     "S": {
       "score": -5,
@@ -2476,11 +2480,11 @@
     },
     "WSW": {
       "score": 5,
-      "grade": "A"
+      "grade": "C"
     },
     "W": {
       "score": 5,
-      "grade": "A"
+      "grade": "C"
     },
     "WNW": {
       "score": -5,
@@ -2488,7 +2492,7 @@
     },
     "NW": {
       "score": -5,
-      "grade": "C"
+      "grade": "A"
     },
     "NNW": {
       "score": -5,
@@ -2518,7 +2522,7 @@
     },
     "ESE": {
       "score": 5,
-      "grade": "A"
+      "grade": "C"
     },
     "SE": {
       "score": 5,
@@ -2530,7 +2534,7 @@
     },
     "S": {
       "score": -5,
-      "grade": "C"
+      "grade": "A"
     },
     "SSW": {
       "score": -5,
@@ -2554,7 +2558,7 @@
     },
     "NW": {
       "score": 5,
-      "grade": "A"
+      "grade": "C"
     },
     "NNW": {
       "score": -5,
@@ -2572,11 +2576,11 @@
   "MICROWAVE": {
     "NE": {
       "score": -5,
-      "grade": "C"
+      "grade": "A"
     },
     "ENE": {
       "score": -5,
-      "grade": "C"
+      "grade": "A"
     },
     "E": {
       "score": -5,
@@ -2588,15 +2592,15 @@
     },
     "SE": {
       "score": 5,
-      "grade": "A"
+      "grade": "C"
     },
     "SSE": {
       "score": 5,
-      "grade": "A"
+      "grade": "C"
     },
     "S": {
       "score": 5,
-      "grade": "A"
+      "grade": "C"
     },
     "SSW": {
       "score": -5,
@@ -2628,11 +2632,11 @@
     },
     "N": {
       "score": -5,
-      "grade": "C"
+      "grade": "A"
     },
     "NNE": {
       "score": -5,
-      "grade": "C"
+      "grade": "A"
     }
   },
   "WATER TAP": {
@@ -2698,17 +2702,17 @@
     },
     "NNE": {
       "score": 5,
-      "grade": "A"
+      "grade": "C"
     }
   },
   "MIRROR": {
     "NE": {
       "score": 5,
-      "grade": "A"
+      "grade": "C"
     },
     "ENE": {
       "score": 5,
-      "grade": "A"
+      "grade": "C"
     },
     "E": {
       "score": -5,
@@ -2716,11 +2720,11 @@
     },
     "ESE": {
       "score": -5,
-      "grade": "C"
+      "grade": "A"
     },
     "SE": {
       "score": -5,
-      "grade": "C"
+      "grade": "A"
     },
     "SSE": {
       "score": -5,
@@ -2760,7 +2764,7 @@
     },
     "N": {
       "score": 5,
-      "grade": "A"
+      "grade": "C"
     },
     "NNE": {
       "score": -5,
@@ -2782,11 +2786,11 @@
     },
     "ESE": {
       "score": 5,
-      "grade": "A"
+      "grade": "C"
     },
     "SE": {
       "score": 5,
-      "grade": "A"
+      "grade": "C"
     },
     "SSE": {
       "score": -5,
@@ -2818,11 +2822,11 @@
     },
     "NW": {
       "score": -5,
-      "grade": "C"
+      "grade": "A"
     },
     "NNW": {
       "score": -5,
-      "grade": "C"
+      "grade": "A"
     },
     "N": {
       "score": -5,
@@ -2848,11 +2852,11 @@
     },
     "ESE": {
       "score": -5,
-      "grade": "C"
+      "grade": "A"
     },
     "SE": {
       "score": -5,
-      "grade": "C"
+      "grade": "A"
     },
     "SSE": {
       "score": -5,
@@ -2876,18 +2880,84 @@
     },
     "W": {
       "score": -5,
-      "grade": "C"
+      "grade": "A"
     },
     "WNW": {
       "score": -5,
-      "grade": "C"
+      "grade": "A"
     },
     "NW": {
       "score": 5,
-      "grade": "A"
+      "grade": "C"
     },
     "NNW": {
       "score": 5,
+      "grade": "C"
+    },
+    "N": {
+      "score": -5,
+      "grade": "A"
+    },
+    "NNE": {
+      "score": -5,
+      "grade": "A"
+    }
+  },
+  "LIFT FOR GOODS": {
+    "NE": {
+      "score": -5,
+      "grade": "A"
+    },
+    "ENE": {
+      "score": -5,
+      "grade": "A"
+    },
+    "E": {
+      "score": -5,
+      "grade": "A"
+    },
+    "ESE": {
+      "score": 5,
+      "grade": "C"
+    },
+    "SE": {
+      "score": 5,
+      "grade": "C"
+    },
+    "SSE": {
+      "score": -5,
+      "grade": "A"
+    },
+    "S": {
+      "score": -5,
+      "grade": "A"
+    },
+    "SSW": {
+      "score": -5,
+      "grade": "A"
+    },
+    "SW": {
+      "score": -5,
+      "grade": "A"
+    },
+    "WSW": {
+      "score": -5,
+      "grade": "A"
+    },
+    "W": {
+      "score": 5,
+      "grade": "C"
+    },
+    "WNW": {
+      "score": 5,
+      "grade": "C"
+    },
+    "NW": {
+      "score": -5,
+      "grade": "A"
+    },
+    "NNW": {
+      "score": -5,
       "grade": "A"
     },
     "N": {
