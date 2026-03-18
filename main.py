@@ -317,16 +317,15 @@ def largest_inner_rectangle(poly: Polygon) -> Polygon:
 
 def is_rectangular(poly: Polygon, north_base_rotation: float) -> bool:
     """Detects if a plot is approximately rectangular."""
-    center = visual_center(poly)
-    # Align to north to check axis-aligned bounding box ratio
-    aligned = shapely_rotate(poly, -north_base_rotation, origin=center)
-    minx, miny, maxx, maxy = aligned.bounds
-    bbox_area = (maxx - minx) * (maxy - miny)
-    if bbox_area <= 0:
+    if poly.is_empty:
+        return False
+        
+    min_rect = poly.minimum_rotated_rectangle
+    if min_rect.area <= 0:
         return False
     
-    # Area ratio check
-    ratio = poly.area / bbox_area
+    # Area ratio check against the true minimum bounding rectangle
+    ratio = poly.area / min_rect.area
     
     # Vertex count check (after simplification)
     # Allow small curves/redundant points
@@ -776,31 +775,49 @@ def analyze_objects(req: ObjectAnalysisRequest) -> VastuAnalysisResult:
                     percentage=round((area / total_area) * 100, 2)
                 ))
 
-        # Calculate for 16 Zones Areas
-        for zone in zones16_regions:
-            poly = to_polygon(zone.polygon)
-            area = poly.area
-            zone_areas_16.append(DevtaArea(
-                name=zone.name,
-                area=round(area, 4),
-                percentage=round((area / total_area) * 100, 2)
-            ))
-
-        # Calculate for 16 Zones Boundary Distribution
+        # Calculate for 16 Zones Areas and Boundary Distribution (using exact wedges to account for concave plots)
         boundary_line = outer_polygon.exterior
         total_perimeter = boundary_line.length
-        if total_perimeter > 0:
-            for zone in zones16_regions:
-                # We can't use the zone polygon directly because it's clipped to the boundary.
-                # Instead, we need the original wedge to see which part of the boundary_line it covers.
-                # Actually, the zone polygon's intersection with the boundary exterior should give us the boundary segment.
-                zone_poly = to_polygon(zone.polygon)
-                boundary_in_zone = boundary_line.intersection(zone_poly)
+        
+        center = visual_center(outer_polygon)
+        step = 360 / 16
+        absolute_start = 11.25
+
+        for i, name in enumerate(ZONE_NAMES_16):
+            start_angle = (absolute_start + i * step - req.north_direction) % 360
+            end_angle = (absolute_start + (i + 1) * step - req.north_direction) % 360
+            
+            # Recreate wedge geometry (a triangle with a very large radius)
+            a1r = math.radians(90 - start_angle)
+            a2r = math.radians(90 - end_angle)
+            r = 20000
+            p1 = (center.x + r * math.cos(a1r), center.y + r * math.sin(a1r))
+            p2 = (center.x + r * math.cos(a2r), center.y + r * math.sin(a2r))
+            wedge = Polygon([(center.x, center.y), p1, p2])
+            
+            # Area calculations (intersecting full outer polygon)
+            clipped_area_poly = wedge.intersection(outer_polygon)
+            area = clipped_area_poly.area
+            zone_areas_16.append(DevtaArea(
+                name=name,
+                area=round(area, 4),
+                percentage=round((area / total_area) * 100, 2) if total_area > 0 else 0.0
+            ))
+            
+            # Boundary length calculations
+            if total_perimeter > 0:
+                boundary_in_zone = boundary_line.intersection(wedge)
                 segment_length = boundary_in_zone.length
                 zone_boundary_16.append(DevtaArea(
-                    name=zone.name,
-                    area=round(segment_length, 4), # using 'area' field for length here for model compatibility
+                    name=name,
+                    area=round(segment_length, 4),
                     percentage=round((segment_length / total_perimeter) * 100, 2)
+                ))
+            else:
+                zone_boundary_16.append(DevtaArea(
+                    name=name,
+                    area=0.0,
+                    percentage=0.0
                 ))
 
     return VastuAnalysisResult(
