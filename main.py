@@ -112,7 +112,7 @@ class AnalysisResponse(BaseModel):
 CENTER_DEVTA = "Brahma"
 
 MIDDLE_DEVTAS = [
-    "Bhudhar", "Apvats", "Aapvatsa",  # Note: text had Aap & Aapvatsa, image shows Apvats & Aapvatsa
+    "Bhudhar", "Aap", "Aapvatsa",  # Note: text had Aap & Aapvatsa, image shows Apvats & Aapvatsa
     "Aaryak", "Savitra", "Saavitra",  # Aryama -> Aaryak
     "Vivasvan", "Indra", "Indraraj",  # Indrajaya -> Indraraj
     "Mitra", "Rudra", "Rudrajay"      # Rudrajaya -> Rudrajay
@@ -139,7 +139,7 @@ ZONE_NAMES_8 = ["NE", "E", "SE", "S", "SW", "W", "NW", "N"]
 # 81-pada Paramasayika Grid Mapping (9x9)
 DEVTA_GRID_81 = [
     ["Rog",      "Naag",      "Mukhya",    "Bhallat",   "Som",       "Sarp",      "Aditi",     "Uditi",     "Shikhi"],
-    ["Paap",     "Rudra",     "Rudra",     "Bhudhar",   "Bhudhar",   "Bhudhar",   "Apvats",    "Apvats",    "Parjanya"],
+    ["Paap",     "Rudra",     "Rudra",     "Bhudhar",   "Bhudhar",   "Bhudhar",   "Aap",       "Aap",       "Parjanya"],
     ["Shosh",    "Rudrajay",  "Rudrajay",  "Bhudhar",   "Bhudhar",   "Bhudhar",   "Aapvatsa",  "Aapvatsa",  "Jayant"],
     ["Asur",     "Mitra",     "Mitra",     "Brahma",    "Brahma",    "Brahma",    "Aaryak",    "Aaryak",    "Kulishayudh"],
     ["Varun",    "Mitra",     "Mitra",     "Brahma",    "Brahma",    "Brahma",    "Aaryak",    "Aaryak",    "Surya"],
@@ -153,7 +153,7 @@ DEVTA_GRID_81 = [
 # Brahma is 2x2. Middle Ring is 2-pada thick. Outer is 1-pada.
 DEVTA_GRID_64 = [
     ["Rog",      "Naag",      "Mukhya",    "Bhallat",   "Som",       "Sarp",      "Aditi",     "Uditi"],
-    ["Paap",     "Rudra",     "Rudra",     "Bhudhar",   "Bhudhar",   "Apvats",    "Apvats",    "Shikhi"], # Corner Shikhi is split
+    ["Paap",     "Rudra",     "Rudra",     "Bhudhar",   "Bhudhar",   "Aap",       "Aap",       "Shikhi"], # Corner Shikhi is split
     ["Shosh",    "Rudrajay",  "Rudrajay",  "Bhudhar",   "Bhudhar",   "Aapvatsa",  "Aapvatsa",  "Parjanya"],
     ["Asur",     "Mitra",     "Mitra",     "Brahma",    "Brahma",    "Aaryak",    "Aaryak",    "Jayant"],
     ["Varun",    "Mitra",     "Mitra",     "Brahma",    "Brahma",    "Aaryak",    "Aaryak",    "Kulishayudh"],
@@ -182,14 +182,14 @@ DEVTA_GRID_64 = [
 #   to a CCW math shift, netting a CW rotation on the canvas.
 
 def to_polygon(pts: List[PointModel]) -> Polygon:
-    """Canvas coords (Y-down) → Shapely polygon in math coords (Y-up)."""
+    """Canvas coords (Y-down) normalized [0,1] → Shapely polygon in math coords (Y-up) scaled to 800x600."""
     if not pts:
         return Polygon()
-    return Polygon([(p.x, -p.y) for p in pts]).buffer(0)
+    return Polygon([(p.x * 800, -(p.y * 600)) for p in pts]).buffer(0)
 
 
 def to_points(poly) -> List[PointModel]:
-    """Shapely geometry (math coords, Y-up) → canvas coords (Y-down)."""
+    """Shapely geometry (math coords 800x600) → normalized canvas coords [0,1] (Y-down)."""
     if poly.is_empty:
         return []
     
@@ -208,7 +208,7 @@ def to_points(poly) -> List[PointModel]:
         return []
 
     if hasattr(poly, 'exterior') and poly.exterior:
-        return [PointModel(x=x, y=-y) for x, y in list(poly.exterior.coords)[:-1]]
+        return [PointModel(x=x / 800, y=-(y / 600)) for x, y in list(poly.exterior.coords)[:-1]]
     return []
 
 # ======================================================
@@ -229,11 +229,11 @@ def get_angle_from_point(center: Point, p: PointModel) -> float:
     """
     Vastu angle (North=0, clockwise) from a math-coord center to a canvas-coord point.
 
-    center : math coords (Y-up), from visual_center().
-    p      : canvas coords (Y-down) — negate p.y to bring into math coords.
+    center : math coords (Y-up) scaled 800x600, from visual_center().
+    p      : canvas coords (Y-down) normalized [0,1] — negate and scale to bring into math coords.
     """
-    dx = p.x - center.x
-    dy = (-p.y) - center.y  # convert canvas Y → math Y
+    dx = (p.x * 800) - center.x
+    dy = -(p.y * 600) - center.y  # convert canvas Y → math Y and scale
 
     angle_rad = math.atan2(dy, dx)
     angle_deg = math.degrees(angle_rad)
@@ -397,7 +397,7 @@ def generate_grid_devtas(poly: Polygon, north_base_rotation: float, grid_type: s
                             suffix = " (N)" if is_north else " (E)"
                             p_to_add.append((p, base_name + suffix))
                         else:
-                            name = "Apvats" if is_north else "Aapvatsa"
+                            name = "Aap" if is_north else "Aapvatsa"
                             p_to_add.append((p, name))
                 else: p_to_add = [(cell, base_name)]
             elif is_sw:
@@ -507,7 +507,7 @@ def generate_angular_devtas(poly: Polygon, north_base_rotation: float, grid_type
     middle_ring = get_ring_poly(brahma_scale, middle_scale)
     middle_divs = [
         ("Bhudhar",   -27,  27),   # N (centered at 0)
-        ("Apvats",     27,  45),   # NE
+        ("Aap",        27,  45),   # NE
         ("Aapvatsa",   45,  63),
         ("Aaryak",     63, 117),   # E (centered at 90)
         ("Savitra",   117, 135),   # SE
@@ -853,7 +853,7 @@ def analyze_plot(req: AnalysisRequest) -> AnalysisResponse:
         devtas45=devtas,
         zones16=generate_zones(outer, req.north_direction, ZONE_NAMES_16, "zone16"),
         zones8=generate_zones(outer, req.north_direction, ZONE_NAMES_8, "zone8"),
-        plot_centroid=PointModel(x=center.x, y=-center.y),  # math → canvas coords
+        plot_centroid=PointModel(x=center.x / 800, y=-(center.y / 600)),  # math → canvas coords normalized [0,1]
     )
 
 # ======================================================
