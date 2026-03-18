@@ -316,23 +316,28 @@ def largest_inner_rectangle(poly: Polygon) -> Polygon:
 
 
 def is_rectangular(poly: Polygon, north_base_rotation: float) -> bool:
-    """Detects if a plot is approximately rectangular."""
+    """Detects if a plot is approximately rectangular and aligned near True North/South/East/West."""
     if poly.is_empty:
         return False
         
-    min_rect = poly.minimum_rotated_rectangle
-    if min_rect.area <= 0:
+    center = visual_center(poly)
+    aligned = shapely_rotate(poly, -north_base_rotation, origin=center)
+    minx, miny, maxx, maxy = aligned.bounds
+    bbox_area = (maxx - minx) * (maxy - miny)
+    
+    if bbox_area <= 0:
         return False
     
-    # Area ratio check against the true minimum bounding rectangle
-    ratio = poly.area / min_rect.area
+    # Area ratio check (enforces that the plot walls are aligned near cardinal directions)
+    ratio = poly.area / bbox_area
     
     # Vertex count check (after simplification)
     # Allow small curves/redundant points
     simplified = poly.simplify(0.01)
     vertex_count = len(simplified.exterior.coords) - 1
     
-    return ratio > 0.95 and vertex_count == 4
+    # Relaxed ratio to 0.85 allows ~7 degree tilt before switching to wedge devtas
+    return ratio > 0.85 and vertex_count == 4
 
 # ======================================================
 # 45 DEVTA ENGINE
@@ -857,10 +862,14 @@ def analyze_plot(req: AnalysisRequest) -> AnalysisResponse:
 
 @app.post("/analyze", response_model=AnalysisResponse)
 async def analyze(req: AnalysisRequest):
+    with open("last_analyze.json", "w") as f:
+        f.write(req.model_dump_json())
     return analyze_plot(req)
 
 @app.post("/analyze_objects", response_model=VastuAnalysisResult)
 async def analyze_objects_endpoint(req: ObjectAnalysisRequest):
+    with open("last_analyze_objects.json", "w") as f:
+        f.write(req.model_dump_json())
     return analyze_objects(req)
 
 @app.get("/health")
