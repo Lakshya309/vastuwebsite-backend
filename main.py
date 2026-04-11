@@ -90,6 +90,8 @@ class VastuAnalysisResult(BaseModel):
     zone_areas_16: List[DevtaArea] = []
     zone_boundary_16: List[DevtaArea] = []
     zones16: List[Region] = [] # Added for frontend canvas support
+    zones8: List[Region] = []
+    devtas45: List[Region] = []
 
 class AnalysisRequest(BaseModel):
     boundary_normalized: List[PointModel]
@@ -812,7 +814,9 @@ def analyze_objects(req: ObjectAnalysisRequest) -> VastuAnalysisResult:
         devta_areas_32=devta_areas_32,
         zone_areas_16=zone_areas_16,
         zone_boundary_16=zone_boundary_16,
-        zones16=zones16_regions
+        zones16=zones16_regions,
+        zones8=generate_zones(outer_polygon, req.north_direction, ZONE_NAMES_8, "zone8"),
+        devtas45=devtas45_regions
     )
 
 # ======================================================
