@@ -184,14 +184,14 @@ DEVTA_GRID_64 = [
 #   to a CCW math shift, netting a CW rotation on the canvas.
 
 def to_polygon(pts: List[PointModel]) -> Polygon:
-    """Canvas coords (Y-down) normalized [0,1] → Shapely polygon in math coords (Y-up) scaled to 800x600."""
+    """Canvas coords (Y-down) normalized [0,1] → Shapely polygon in math coords (Y-up) scaled to 1000x1000."""
     if not pts:
         return Polygon()
-    return Polygon([(p.x * 800, -(p.y * 600)) for p in pts]).buffer(0)
+    return Polygon([(p.x * 1000, -(p.y * 1000)) for p in pts]).buffer(0)
 
 
 def to_points(poly) -> List[PointModel]:
-    """Shapely geometry (math coords 800x600) → normalized canvas coords [0,1] (Y-down)."""
+    """Shapely geometry (math coords 1000x1000) → normalized canvas coords [0,1] (Y-down)."""
     if poly.is_empty:
         return []
     
@@ -210,7 +210,7 @@ def to_points(poly) -> List[PointModel]:
         return []
 
     if hasattr(poly, 'exterior') and poly.exterior:
-        return [PointModel(x=x / 800, y=-(y / 600)) for x, y in list(poly.exterior.coords)[:-1]]
+        return [PointModel(x=x / 1000, y=-(y / 1000)) for x, y in list(poly.exterior.coords)[:-1]]
     return []
 
 # ======================================================
@@ -231,11 +231,11 @@ def get_angle_from_point(center: Point, p: PointModel) -> float:
     """
     Vastu angle (North=0, clockwise) from a math-coord center to a canvas-coord point.
 
-    center : math coords (Y-up) scaled 800x600, from visual_center().
+    center : math coords (Y-up) scaled 1000x1000, from visual_center().
     p      : canvas coords (Y-down) normalized [0,1] — negate and scale to bring into math coords.
     """
-    dx = (p.x * 800) - center.x
-    dy = -(p.y * 600) - center.y  # convert canvas Y → math Y and scale
+    dx = (p.x * 1000) - center.x
+    dy = -(p.y * 1000) - center.y  # convert canvas Y → math Y and scale
 
     angle_rad = math.atan2(dy, dx)
     angle_deg = math.degrees(angle_rad)
@@ -838,7 +838,8 @@ def analyze_objects(req: ObjectAnalysisRequest) -> VastuAnalysisResult:
         zone_boundary_16=zone_boundary_16,
         zones16=zones16_regions,
         zones8=generate_zones(outer_polygon, req.north_direction, ZONE_NAMES_8, "zone8"),
-        devtas45=devtas45_regions
+        devtas45=devtas45_regions,
+        plot_centroid=PointModel(x=center.x / 1000, y=-(center.y / 1000)),  # math → canvas coords normalized [0,1]
     )
 
 # ======================================================
@@ -857,7 +858,7 @@ def analyze_plot(req: AnalysisRequest) -> AnalysisResponse:
         devtas45=devtas,
         zones16=generate_zones(outer, req.north_direction, ZONE_NAMES_16, "zone16"),
         zones8=generate_zones(outer, req.north_direction, ZONE_NAMES_8, "zone8"),
-        plot_centroid=PointModel(x=center.x / 800, y=-(center.y / 600)),  # math → canvas coords normalized [0,1]
+        plot_centroid=PointModel(x=center.x / 1000, y=-(center.y / 1000)),  # math → canvas coords normalized [0,1]
     )
 
 # ======================================================
