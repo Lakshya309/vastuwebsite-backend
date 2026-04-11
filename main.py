@@ -867,14 +867,10 @@ def analyze_plot(req: AnalysisRequest) -> AnalysisResponse:
 
 @app.post("/analyze", response_model=AnalysisResponse)
 async def analyze(req: AnalysisRequest):
-    with open("last_analyze.json", "w") as f:
-        f.write(req.model_dump_json())
     return analyze_plot(req)
 
 @app.post("/analyze_objects", response_model=VastuAnalysisResult)
 async def analyze_objects_endpoint(req: ObjectAnalysisRequest):
-    with open("last_analyze_objects.json", "w") as f:
-        f.write(req.model_dump_json())
     return analyze_objects(req)
 
 @app.get("/health")
