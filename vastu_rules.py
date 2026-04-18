@@ -117,7 +117,7 @@ def get_vastu_remedy(
     if grade == "C" or grade == "C ":
         return f"EXCELLENT: {object_type} in {direction} is well-placed and beneficial."
     elif grade == "B" or grade == "B ":
-        return f"BAD: {object_type} in {direction} creates negative effects. Use Magic Rod or Magic Box as a remedy."
+        return f"BAD: {object_type} in {direction} creates negative effects. Use Direction Rod , Multipurpose Rod or Magic Box as a remedy."
     elif grade == "A" or grade == "A ":
         return f"CRITICAL: {object_type} in {direction} is a major Vastu Dosha. Immediate remedy or relocation required."
 
