@@ -1,0 +1,56 @@
+name: Deploy Vastu Spatial Engine Backend
+
+on:
+  push:
+    branches:
+      - grid-based-devtas
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Deploy to VPS
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USER }}
+          key: ${{ secrets.VPS_SSH_KEY }}
+          port: 22
+          debug: true
+          script: |
+            export PATH=$PATH:/usr/local/bin:/usr/bin:/bin
+            
+            # Find the backend directory dynamically
+            if [ -d "/var/www/vastuwebsite-backend" ]; then
+              cd /var/www/vastuwebsite-backend
+            elif [ -d "/var/www/vastu-backend" ]; then
+              cd /var/www/vastu-backend
+            elif [ -d "/var/www/apiapp" ]; then
+              cd /var/www/apiapp
+            elif [ -d "/var/www/vastu_backend" ]; then
+              cd /var/www/vastu_backend
+            else
+              echo "Backend directory not found on VPS!"
+              exit 1
+            fi
+            
+            echo "Working directory is: $(pwd)"
+            
+            # Pull latest changes
+            git fetch origin grid-based-devtas
+            git checkout grid-based-devtas
+            git pull origin grid-based-devtas
+            
+            # Install python requirements inside virtual environment
+            if [ -d "venv" ]; then
+              ./venv/bin/pip install -r requirements.txt
+            else
+              python3 -m venv venv
+              ./venv/bin/pip install -r requirements.txt
+            fi
+            
+            # Restart backend PM2 process
+            pm2 restart apiapp || pm2 start "./venv/bin/python -m uvicorn main:app --host 0.0.0.0 --port 5000" --name "apiapp"
+            
+            echo "Deployment completed successfully!"
