@@ -22,7 +22,7 @@ from typing import List, Optional, Literal, Tuple
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field
-from shapely.geometry import Polygon, Point, MultiPolygon, box
+from shapely.geometry import Polygon, Point, MultiPolygon, box, LineString
 from shapely.affinity import scale as shapely_scale, rotate as shapely_rotate
 from shapely.ops import unary_union
 
@@ -55,8 +55,14 @@ class Region(BaseModel):
     polygon: List[PointModel]
     ring: str
     startAngle: Optional[float] = None
+    centerAngle: Optional[float] = None
     endAngle: Optional[float] = None
     source: str
+    left_intersection: Optional[PointModel] = None
+    center_intersection: Optional[PointModel] = None
+    right_intersection: Optional[PointModel] = None
+    boundary_path: Optional[List[PointModel]] = None
+    boundary_length: Optional[float] = None
 
 class PlacedObject(BaseModel):
     id: str
@@ -97,6 +103,7 @@ class AnalysisRequest(BaseModel):
     boundary_normalized: List[PointModel]
     north_direction: float = Field(default=0.0)
     grid_type: Literal["81", "64"] = Field(default="81")
+    aspect_ratio: float = Field(default=4.0 / 3.0)
 
 class ObjectAnalysisRequest(AnalysisRequest):
     placed_objects: List[PlacedObject]
@@ -132,11 +139,11 @@ OUTER_DEVTAS = [
 ]
 
 ZONE_NAMES_16: List[Direction] = [
-    "NNE", "NE", "ENE", "E", "ESE", "SE", "SSE", "S",
-    "SSW", "SW", "WSW", "W", "WNW", "NW", "NNW", "N"
+    "N", "NNE", "NE", "ENE", "E", "ESE", "SE", "SSE",
+    "S", "SSW", "SW", "WSW", "W", "WNW", "NW", "NNW"
 ]
 
-ZONE_NAMES_8 = ["NE", "E", "SE", "S", "SW", "W", "NW", "N"]
+ZONE_NAMES_8 = ["N", "NE", "E", "SE", "S", "SW", "W", "NW"]
 
 # 81-pada Paramasayika Grid Mapping (9x9)
 DEVTA_GRID_81 = [
@@ -227,7 +234,7 @@ def visual_center(poly: Polygon) -> Point:
     return c if poly.contains(c) else poly.representative_point()
 
 
-def get_angle_from_point(center: Point, p: PointModel) -> float:
+def get_angle_from_point(center: Point, p: PointModel, aspect_ratio: float = 4.0 / 3.0) -> float:
     """
     Vastu angle (North=0, clockwise) from a math-coord center to a canvas-coord point.
 
@@ -237,7 +244,7 @@ def get_angle_from_point(center: Point, p: PointModel) -> float:
     dx = (p.x * 1000) - center.x
     dy = -(p.y * 1000) - center.y  # convert canvas Y → math Y and scale
 
-    angle_rad = math.atan2(dy, dx)
+    angle_rad = math.atan2(dy / aspect_ratio, dx)
     angle_deg = math.degrees(angle_rad)
     if angle_deg < 0:
         angle_deg += 360
@@ -260,24 +267,19 @@ def get_zone_from_angle(
     if num_zones == 0:
         return None
 
-    absolute_start = 0.0
-    if zones_names == ZONE_NAMES_16:
-        absolute_start = 11.25
-    elif zones_names == ZONE_NAMES_8:
-        absolute_start = 22.5
-
     step = 360 / num_zones
+    absolute_start = - (step / 2)
 
     # Invert the ADD rotation applied during generation
     angle_in_unrotated_mandala = (angle - north_base_rotation + 360) % 360
 
     for i, name in enumerate(zones_names):
-        base_start = absolute_start + i * step
-        base_end = absolute_start + (i + 1) * step
+        base_start = (absolute_start + i * step + 360) % 360
+        base_end = (absolute_start + (i + 1) * step + 360) % 360
 
-        if base_end >= 360 and base_start < 360:
+        if base_end < base_start:
             if (base_start <= angle_in_unrotated_mandala < 360) or \
-               (0 <= angle_in_unrotated_mandala < (base_end % 360)):
+               (0 <= angle_in_unrotated_mandala < base_end):
                 return name
         elif base_start <= angle_in_unrotated_mandala < base_end:
             return name
@@ -288,16 +290,23 @@ def get_zone_from_angle(
 # GEOMETRY CORE
 # ======================================================
 
-def angular_wedge(boundary: Polygon, center: Point, a1: float, a2: float, r: float = 2000):
+def angular_wedge(boundary: Polygon, center: Point, a1: float, a2: float, aspect_ratio: float = 4.0 / 3.0, r: float = 20000.0):
     """
     Clips a wedge from `boundary` spanning Vastu angles a1 → a2.
-    All coords are math (Y-up); (90 - angle) maps Vastu → standard math angle correctly.
+    Corrects for the canvas aspect ratio (W / H) so angular boundaries
+    align 1:1 with Euclidean screen angles.
     """
-    a1r = math.radians(90 - a1)
-    a2r = math.radians(90 - a2)
+    a1_rad = math.radians(a1)
+    dx1 = math.sin(a1_rad)
+    dy1 = math.cos(a1_rad) * aspect_ratio
+    mag1 = math.hypot(dx1, dy1) or 1.0
+    p1 = (center.x + r * (dx1 / mag1), center.y + r * (dy1 / mag1))
 
-    p1 = (center.x + r * math.cos(a1r), center.y + r * math.sin(a1r))
-    p2 = (center.x + r * math.cos(a2r), center.y + r * math.sin(a2r))
+    a2_rad = math.radians(a2)
+    dx2 = math.sin(a2_rad)
+    dy2 = math.cos(a2_rad) * aspect_ratio
+    mag2 = math.hypot(dx2, dy2) or 1.0
+    p2 = (center.x + r * (dx2 / mag2), center.y + r * (dy2 / mag2))
 
     wedge = Polygon([(center.x, center.y), p1, p2])
     clipped = wedge.intersection(boundary)
@@ -307,6 +316,37 @@ def angular_wedge(boundary: Polygon, center: Point, a1: float, a2: float, r: flo
     if isinstance(clipped, MultiPolygon):
         return max(clipped.geoms, key=lambda g: g.area)
     return clipped
+
+
+def get_ray_intersect(c: Point, vastu_angle: float, boundary_geom, aspect_ratio: float = 4.0 / 3.0) -> Optional[PointModel]:
+    """Casts a ray from centroid c at vastu_angle and finds the exact intersection with boundary_geom."""
+    a_rad = math.radians(vastu_angle)
+    dx = math.sin(a_rad)
+    dy = math.cos(a_rad) * aspect_ratio
+    r = 20000.0
+    ray = LineString([(c.x, c.y), (c.x + r * dx, c.y + r * dy)])
+    isect = ray.intersection(boundary_geom)
+    if isect.is_empty:
+        return None
+    pt = None
+    if isect.geom_type == 'Point':
+        pt = isect
+    elif isect.geom_type == 'MultiPoint':
+        pts_list = list(isect.geoms)
+        # Sort by distance from centroid and take the closest exit point
+        # (first intersection the ray hits leaving the interior)
+        pts_list.sort(key=lambda p: c.distance(p))
+        pt = pts_list[0]
+    elif isect.geom_type == 'LineString':
+        # Ray grazes a wall segment – take the midpoint of the graze
+        coords = list(isect.coords)
+        mx = (coords[0][0] + coords[-1][0]) / 2
+        my = (coords[0][1] + coords[-1][1]) / 2
+        from shapely.geometry import Point as ShapelyPoint
+        pt = ShapelyPoint(mx, my)
+    if pt:
+        return PointModel(x=round(pt.x / 1000.0, 6), y=round(-pt.y / 1000.0, 6))
+    return None
 
 
 def largest_inner_rectangle(poly: Polygon) -> Polygon:
@@ -323,7 +363,7 @@ def is_rectangular(poly: Polygon, north_base_rotation: float) -> bool:
         return False
         
     center = visual_center(poly)
-    aligned = shapely_rotate(poly, -north_base_rotation, origin=center)
+    aligned = shapely_rotate(poly, north_base_rotation, origin=center)
     minx, miny, maxx, maxy = aligned.bounds
     bbox_area = (maxx - minx) * (maxy - miny)
     
@@ -350,7 +390,7 @@ def generate_grid_devtas(poly: Polygon, north_base_rotation: float, grid_type: s
     Generates 45 Devtas using a 9x9 or 8x8 grid approach with diagonal corner splits.
     """
     center = visual_center(poly)
-    aligned_poly = shapely_rotate(poly, -north_base_rotation, origin=center)
+    aligned_poly = shapely_rotate(poly, north_base_rotation, origin=center)
     minx, miny, maxx, maxy = aligned_poly.bounds
     
     n = 9 if grid_type == "81" else 8
@@ -443,7 +483,7 @@ def generate_grid_devtas(poly: Polygon, north_base_rotation: float, grid_type: s
         isect = unary_union(polys).intersection(aligned_poly)
         if isect.is_empty: continue
         
-        final_poly = shapely_rotate(isect, north_base_rotation, origin=center)
+        final_poly = shapely_rotate(isect, -north_base_rotation, origin=center)
         ring = "outer"
         if name == CENTER_DEVTA: ring = "center"
         elif any(m in name for m in MIDDLE_DEVTAS): ring = "middle"
@@ -457,7 +497,7 @@ def generate_grid_devtas(poly: Polygon, north_base_rotation: float, grid_type: s
     return regions
 
 
-def generate_angular_devtas(poly: Polygon, north_base_rotation: float, grid_type: str = "81"):
+def generate_angular_devtas(poly: Polygon, north_base_rotation: float, grid_type: str = "81", aspect_ratio: float = 4.0 / 3.0):
     """
     Generates 45 Devtas using a Concentric Ring-Grid approach for irregular plots.
     Supports 81-pada (1/3 center, 7/9 middle) and 64-pada (1/4 center, 3/4 middle) proportions.
@@ -487,7 +527,7 @@ def generate_angular_devtas(poly: Polygon, north_base_rotation: float, grid_type
         res = []
         for name, start, end in divisions:
             # We use angular_wedge to get a clean slice of the scaled plot ring
-            wedge = angular_wedge(poly, center, (start - north_base_rotation) % 360, (end - north_base_rotation) % 360)
+            wedge = angular_wedge(poly, center, (start + north_base_rotation) % 360, (end + north_base_rotation) % 360, aspect_ratio=aspect_ratio)
             if wedge:
                 isect = wedge.intersection(ring_poly)
                 if not isect.is_empty:
@@ -496,7 +536,8 @@ def generate_angular_devtas(poly: Polygon, north_base_rotation: float, grid_type
                         res.append(Region(
                             id=f"d-{did}", name=name, polygon=pts,
                             ring=ring_label, source=tag,
-                            startAngle=normalize_angle(start), endAngle=normalize_angle(end)
+                            startAngle=normalize_angle(start + north_base_rotation),
+                            endAngle=normalize_angle(end + north_base_rotation)
                         ))
                         did += 1
         return res
@@ -532,10 +573,10 @@ def generate_angular_devtas(poly: Polygon, north_base_rotation: float, grid_type
         "Varun", "Asur", "Shosh", "Paap", "Rog", "Naag", "Mukhya", "Bhallat"
     ]
     outer_divs = []
-    # Center Som at 0 deg. Som is index 0.
+    # Som is N5, starting at 0 deg (N4/N5 boundary is True North 0 deg)
     for i, name in enumerate(outer_names):
-        start = i * 11.25 - 5.625
-        end = (i+1) * 11.25 - 5.625
+        start = i * 11.25
+        end = (i + 1) * 11.25
         outer_divs.append((name, start, end))
     
     regions.extend(create_and_intersect(outer_ring, outer_divs, "outer"))
@@ -543,12 +584,12 @@ def generate_angular_devtas(poly: Polygon, north_base_rotation: float, grid_type
     return regions
 
 
-def generate_45_devtas(poly: Polygon, north_base_rotation: float, grid_type: str = "81"):
+def generate_45_devtas(poly: Polygon, north_base_rotation: float, grid_type: str = "81", aspect_ratio: float = 4.0 / 3.0):
     """Hybrid controller for 45 Devtas."""
     if is_rectangular(poly, north_base_rotation):
         return generate_grid_devtas(poly, north_base_rotation, grid_type)
     else:
-        return generate_angular_devtas(poly, north_base_rotation, grid_type)
+        return generate_angular_devtas(poly, north_base_rotation, grid_type, aspect_ratio=aspect_ratio)
 
 # ======================================================
 # 8 / 16 ZONE ENGINE
@@ -558,7 +599,8 @@ def generate_zones(
     poly: Polygon,
     north_base_rotation: float,
     names: List[Direction],
-    label: str
+    label: str,
+    aspect_ratio: float = 4.0 / 3.0
 ):
     """
     poly is in math coords (Y-up).
@@ -567,31 +609,56 @@ def generate_zones(
     zones = []
     center = visual_center(poly)
     step = 360 / len(names)
+    absolute_start = - (step / 2)
 
-    absolute_start = 0.0
-    if label == "zone16":
-        absolute_start = 11.25
-    elif label == "zone8":
-        absolute_start = 22.5
-
-    # Similarly, subtract north_base_rotation for CCW rotation mapping
     for i, name in enumerate(names):
         base_start = absolute_start + i * step
+        base_center = base_start + (step / 2)
         base_end = absolute_start + (i + 1) * step
 
-        start_angle = (base_start - north_base_rotation) % 360
-        end_angle = (base_end - north_base_rotation) % 360
+        start_angle = (base_start + north_base_rotation) % 360
+        center_angle = (base_center + north_base_rotation) % 360
+        end_angle = (base_end + north_base_rotation) % 360
 
-        w = angular_wedge(poly, center, start_angle, end_angle)
+        # Automated Angular Validation Assertions
+        span = (end_angle - start_angle + 360) % 360
+        assert abs(span - step) < 1e-5, f"Zone {name} angular width {span} != {step}"
+        left_half = (center_angle - start_angle + 360) % 360
+        right_half = (end_angle - center_angle + 360) % 360
+        assert abs(left_half - step / 2) < 1e-5, f"Left half {left_half} != {step / 2}"
+        assert abs(right_half - step / 2) < 1e-5, f"Right half {right_half} != {step / 2}"
+
+        w = angular_wedge(poly, center, start_angle, end_angle, aspect_ratio=aspect_ratio)
         if w:
+            left_isect = get_ray_intersect(center, start_angle, poly.boundary, aspect_ratio=aspect_ratio)
+            center_isect = get_ray_intersect(center, center_angle, poly.boundary, aspect_ratio=aspect_ratio)
+            right_isect = get_ray_intersect(center, end_angle, poly.boundary, aspect_ratio=aspect_ratio)
+
+            b_in_zone = poly.boundary.intersection(w)
+            b_length = round(b_in_zone.length / 1000.0, 4) if not b_in_zone.is_empty else 0.0
+
+            path_pts = []
+            if not b_in_zone.is_empty:
+                if b_in_zone.geom_type == 'LineString':
+                    path_pts = [PointModel(x=round(p[0]/1000.0, 6), y=round(-p[1]/1000.0, 6)) for p in b_in_zone.coords]
+                elif b_in_zone.geom_type == 'MultiLineString':
+                    for ls in b_in_zone.geoms:
+                        path_pts.extend([PointModel(x=round(p[0]/1000.0, 6), y=round(-p[1]/1000.0, 6)) for p in ls.coords])
+
             zones.append(Region(
                 id=f"{label}-{i+1}",
                 name=name,
                 polygon=to_points(w),
                 ring=label,
-                startAngle=normalize_angle(start_angle),
-                endAngle=normalize_angle(end_angle),
-                source="directional"
+                startAngle=round(normalize_angle(start_angle), 4),
+                centerAngle=round(normalize_angle(center_angle), 4),
+                endAngle=round(normalize_angle(end_angle), 4),
+                source="directional",
+                left_intersection=left_isect,
+                center_intersection=center_isect,
+                right_intersection=right_isect,
+                boundary_path=path_pts,
+                boundary_length=b_length
             ))
     return zones
 
@@ -613,9 +680,9 @@ def analyze_objects(req: ObjectAnalysisRequest) -> VastuAnalysisResult:
 
     # Detected plot type and assign devtas using hybrid logic
     # Rectacular -> Grid, Irregular/Concave -> Angular (Proportional cuts)
-    devtas45_regions = generate_45_devtas(outer_polygon, req.north_direction, req.grid_type)
+    devtas45_regions = generate_45_devtas(outer_polygon, req.north_direction, req.grid_type, aspect_ratio=req.aspect_ratio)
 
-    zones16_regions = generate_zones(outer_polygon, req.north_direction, ZONE_NAMES_16, "zone16")
+    zones16_regions = generate_zones(outer_polygon, req.north_direction, ZONE_NAMES_16, "zone16", aspect_ratio=req.aspect_ratio)
 
     analyzed_objects: List[AnalyzedObjectResult] = []
     total_score = 0
@@ -698,7 +765,7 @@ def analyze_objects(req: ObjectAnalysisRequest) -> VastuAnalysisResult:
             else:
                 # Centroid fallback
                 plot_center_point = visual_center(outer_polygon)  # math coords
-                obj_angle = get_angle_from_point(plot_center_point, obj.centroid)
+                obj_angle = get_angle_from_point(plot_center_point, obj.centroid, aspect_ratio=req.aspect_ratio)
                 fallback_direction = get_zone_from_angle(obj_angle, req.north_direction, ZONE_NAMES_16)
 
                 if fallback_direction:
@@ -788,22 +855,17 @@ def analyze_objects(req: ObjectAnalysisRequest) -> VastuAnalysisResult:
         
         center = visual_center(outer_polygon)
         step = 360 / 16
-        absolute_start = 11.25
+        absolute_start = -11.25
 
         for i, name in enumerate(ZONE_NAMES_16):
-            start_angle = (absolute_start + i * step - req.north_direction) % 360
-            end_angle = (absolute_start + (i + 1) * step - req.north_direction) % 360
+            start_angle = (absolute_start + i * step + req.north_direction) % 360
+            end_angle = (absolute_start + (i + 1) * step + req.north_direction) % 360
             
-            # Recreate wedge geometry (a triangle with a very large radius)
-            a1r = math.radians(90 - start_angle)
-            a2r = math.radians(90 - end_angle)
-            r = 20000
-            p1 = (center.x + r * math.cos(a1r), center.y + r * math.sin(a1r))
-            p2 = (center.x + r * math.cos(a2r), center.y + r * math.sin(a2r))
-            wedge = Polygon([(center.x, center.y), p1, p2])
+            # Recreate wedge geometry with aspect ratio correction
+            wedge = angular_wedge(outer_polygon, center, start_angle, end_angle, aspect_ratio=req.aspect_ratio)
             
             # Area calculations (intersecting full outer polygon)
-            clipped_area_poly = wedge.intersection(outer_polygon)
+            clipped_area_poly = wedge if wedge else Polygon()
             area = clipped_area_poly.area
             zone_areas_16.append(DevtaArea(
                 name=name,
@@ -812,7 +874,7 @@ def analyze_objects(req: ObjectAnalysisRequest) -> VastuAnalysisResult:
             ))
             
             # Boundary length calculations
-            if total_perimeter > 0:
+            if total_perimeter > 0 and wedge:
                 boundary_in_zone = boundary_line.intersection(wedge)
                 segment_length = boundary_in_zone.length
                 zone_boundary_16.append(DevtaArea(
@@ -837,7 +899,7 @@ def analyze_objects(req: ObjectAnalysisRequest) -> VastuAnalysisResult:
         zone_areas_16=zone_areas_16,
         zone_boundary_16=zone_boundary_16,
         zones16=zones16_regions,
-        zones8=generate_zones(outer_polygon, req.north_direction, ZONE_NAMES_8, "zone8"),
+        zones8=generate_zones(outer_polygon, req.north_direction, ZONE_NAMES_8, "zone8", aspect_ratio=req.aspect_ratio),
         devtas45=devtas45_regions,
         plot_centroid=PointModel(x=center.x / 1000, y=-(center.y / 1000)),  # math → canvas coords normalized [0,1]
     )
@@ -852,12 +914,12 @@ def analyze_plot(req: AnalysisRequest) -> AnalysisResponse:
 
     # Hybrid logic: Rectangular plots follow the 9x9 grid, 
     # irregular plots use angular wedges to ensure proportional cuts.
-    devtas = generate_45_devtas(outer, req.north_direction, req.grid_type)
+    devtas = generate_45_devtas(outer, req.north_direction, req.grid_type, aspect_ratio=req.aspect_ratio)
 
     return AnalysisResponse(
         devtas45=devtas,
-        zones16=generate_zones(outer, req.north_direction, ZONE_NAMES_16, "zone16"),
-        zones8=generate_zones(outer, req.north_direction, ZONE_NAMES_8, "zone8"),
+        zones16=generate_zones(outer, req.north_direction, ZONE_NAMES_16, "zone16", aspect_ratio=req.aspect_ratio),
+        zones8=generate_zones(outer, req.north_direction, ZONE_NAMES_8, "zone8", aspect_ratio=req.aspect_ratio),
         plot_centroid=PointModel(x=center.x / 1000, y=-(center.y / 1000)),  # math → canvas coords normalized [0,1]
     )
 
