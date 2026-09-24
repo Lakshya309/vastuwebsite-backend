@@ -678,11 +678,13 @@ def analyze_objects(req: ObjectAnalysisRequest) -> VastuAnalysisResult:
             zones16=[]
         )
 
+    effective_north = -req.north_direction
+
     # Detected plot type and assign devtas using hybrid logic
     # Rectacular -> Grid, Irregular/Concave -> Angular (Proportional cuts)
-    devtas45_regions = generate_45_devtas(outer_polygon, req.north_direction, req.grid_type, aspect_ratio=req.aspect_ratio)
+    devtas45_regions = generate_45_devtas(outer_polygon, effective_north, req.grid_type, aspect_ratio=req.aspect_ratio)
 
-    zones16_regions = generate_zones(outer_polygon, req.north_direction, ZONE_NAMES_16, "zone16", aspect_ratio=req.aspect_ratio)
+    zones16_regions = generate_zones(outer_polygon, effective_north, ZONE_NAMES_16, "zone16", aspect_ratio=req.aspect_ratio)
 
     analyzed_objects: List[AnalyzedObjectResult] = []
     total_score = 0
@@ -766,7 +768,7 @@ def analyze_objects(req: ObjectAnalysisRequest) -> VastuAnalysisResult:
                 # Centroid fallback
                 plot_center_point = visual_center(outer_polygon)  # math coords
                 obj_angle = get_angle_from_point(plot_center_point, obj.centroid, aspect_ratio=req.aspect_ratio)
-                fallback_direction = get_zone_from_angle(obj_angle, req.north_direction, ZONE_NAMES_16)
+                fallback_direction = get_zone_from_angle(obj_angle, effective_north, ZONE_NAMES_16)
 
                 if fallback_direction:
                     zone16_direction = fallback_direction
@@ -858,8 +860,8 @@ def analyze_objects(req: ObjectAnalysisRequest) -> VastuAnalysisResult:
         absolute_start = -11.25
 
         for i, name in enumerate(ZONE_NAMES_16):
-            start_angle = (absolute_start + i * step + req.north_direction) % 360
-            end_angle = (absolute_start + (i + 1) * step + req.north_direction) % 360
+            start_angle = (absolute_start + i * step + effective_north) % 360
+            end_angle = (absolute_start + (i + 1) * step + effective_north) % 360
             
             # Recreate wedge geometry with aspect ratio correction
             wedge = angular_wedge(outer_polygon, center, start_angle, end_angle, aspect_ratio=req.aspect_ratio)
@@ -899,7 +901,7 @@ def analyze_objects(req: ObjectAnalysisRequest) -> VastuAnalysisResult:
         zone_areas_16=zone_areas_16,
         zone_boundary_16=zone_boundary_16,
         zones16=zones16_regions,
-        zones8=generate_zones(outer_polygon, req.north_direction, ZONE_NAMES_8, "zone8", aspect_ratio=req.aspect_ratio),
+        zones8=generate_zones(outer_polygon, effective_north, ZONE_NAMES_8, "zone8", aspect_ratio=req.aspect_ratio),
         devtas45=devtas45_regions,
         plot_centroid=PointModel(x=center.x / 1000, y=-(center.y / 1000)),  # math → canvas coords normalized [0,1]
     )
@@ -911,15 +913,16 @@ def analyze_objects(req: ObjectAnalysisRequest) -> VastuAnalysisResult:
 def analyze_plot(req: AnalysisRequest) -> AnalysisResponse:
     outer = to_polygon(req.boundary_normalized)  # math coords (Y-up)
     center = visual_center(outer)                 # math coords (Y-up)
+    effective_north = -req.north_direction
 
     # Hybrid logic: Rectangular plots follow the 9x9 grid, 
     # irregular plots use angular wedges to ensure proportional cuts.
-    devtas = generate_45_devtas(outer, req.north_direction, req.grid_type, aspect_ratio=req.aspect_ratio)
+    devtas = generate_45_devtas(outer, effective_north, req.grid_type, aspect_ratio=req.aspect_ratio)
 
     return AnalysisResponse(
         devtas45=devtas,
-        zones16=generate_zones(outer, req.north_direction, ZONE_NAMES_16, "zone16", aspect_ratio=req.aspect_ratio),
-        zones8=generate_zones(outer, req.north_direction, ZONE_NAMES_8, "zone8", aspect_ratio=req.aspect_ratio),
+        zones16=generate_zones(outer, effective_north, ZONE_NAMES_16, "zone16", aspect_ratio=req.aspect_ratio),
+        zones8=generate_zones(outer, effective_north, ZONE_NAMES_8, "zone8", aspect_ratio=req.aspect_ratio),
         plot_centroid=PointModel(x=center.x / 1000, y=-(center.y / 1000)),  # math → canvas coords normalized [0,1]
     )
 
