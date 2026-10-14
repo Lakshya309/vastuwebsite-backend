@@ -213,7 +213,7 @@ def to_points(poly) -> List[PointModel]:
         if poly.geom_type == 'MultiPolygon':
             poly = max(poly.geoms, key=lambda g: g.area)
     
-    if poly.geom_type != 'Polygon':
+    if poly.geom_type != 'Polygon' or poly.area < 0.01:
         return []
 
     if hasattr(poly, 'exterior') and poly.exterior:
@@ -481,16 +481,18 @@ def generate_grid_devtas(poly: Polygon, north_base_rotation: float, grid_type: s
     did = 1
     for name, polys in devta_polygons.items():
         isect = unary_union(polys).intersection(aligned_poly)
-        if isect.is_empty: continue
+        if isect.is_empty or isect.area < 0.01: continue
         
         final_poly = shapely_rotate(isect, -north_base_rotation, origin=center)
         ring = "outer"
         if name == CENTER_DEVTA: ring = "center"
         elif any(m in name for m in MIDDLE_DEVTAS): ring = "middle"
             
+        pts = to_points(final_poly)
+        if not pts: continue
         regions.append(Region(
             id=f"d-{did}", name=name,
-            polygon=to_points(final_poly),
+            polygon=pts,
             ring=ring, source=f"grid-{grid_type}"
         ))
         did += 1
@@ -515,9 +517,11 @@ def generate_angular_devtas(poly: Polygon, north_base_rotation: float, grid_type
 
     def get_ring_poly(inner_s, outer_s):
         o = shapely_scale(poly, xfact=outer_s, yfact=outer_s, origin=center)
-        if inner_s == 0: return o
+        if inner_s == 0:
+            return o.intersection(poly)
         i = shapely_scale(poly, xfact=inner_s, yfact=inner_s, origin=center)
-        return o.difference(i)
+        ring = o.difference(i)
+        return ring.intersection(poly)
 
     # Ring 1: Brahma (Center)
     regions = []
@@ -530,7 +534,9 @@ def generate_angular_devtas(poly: Polygon, north_base_rotation: float, grid_type
             wedge = angular_wedge(poly, center, (start + north_base_rotation) % 360, (end + north_base_rotation) % 360, aspect_ratio=aspect_ratio)
             if wedge:
                 isect = wedge.intersection(ring_poly)
-                if not isect.is_empty:
+                # Extra clipping against the outer boundary to avoid concave spillover (e.g. L-shaped cutouts)
+                isect = isect.intersection(poly)
+                if not isect.is_empty and isect.area > 0.01:
                     pts = to_points(isect)
                     if pts:
                         res.append(Region(
@@ -635,15 +641,16 @@ def generate_zones(
             right_isect = get_ray_intersect(center, end_angle, poly.boundary, aspect_ratio=aspect_ratio)
 
             b_in_zone = poly.boundary.intersection(w)
-            b_length = round(b_in_zone.length / 1000.0, 4) if not b_in_zone.is_empty else 0.0
+            b_length = round(b_in_zone.length / 1000.0, 4) if (not b_in_zone.is_empty and b_in_zone.length > 0.1) else 0.0
 
             path_pts = []
-            if not b_in_zone.is_empty:
+            if b_length > 0.0 and not b_in_zone.is_empty:
                 if b_in_zone.geom_type == 'LineString':
                     path_pts = [PointModel(x=round(p[0]/1000.0, 6), y=round(-p[1]/1000.0, 6)) for p in b_in_zone.coords]
                 elif b_in_zone.geom_type == 'MultiLineString':
                     for ls in b_in_zone.geoms:
-                        path_pts.extend([PointModel(x=round(p[0]/1000.0, 6), y=round(-p[1]/1000.0, 6)) for p in ls.coords])
+                        if ls.length > 0.1:
+                            path_pts.extend([PointModel(x=round(p[0]/1000.0, 6), y=round(-p[1]/1000.0, 6)) for p in ls.coords])
 
             zones.append(Region(
                 id=f"{label}-{i+1}",

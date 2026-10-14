@@ -34,7 +34,7 @@ This is the Python-based FastAPI microservice for the Vastu Spatial Engine. It h
 
 5. **Start the development server:**
    ```bash
-uvicorn main:app --reload --port 5000
+uvicorn main:app --reload --port 8001
    ```
 
 The server should now be running at `http://127.0.0.1:8000`. 
